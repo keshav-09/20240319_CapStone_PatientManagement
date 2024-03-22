@@ -31,7 +31,7 @@ async function verifyJwt(req, res, next) {
     }
 }
 
-/** helper function to get the user object from it's ID
+/** Helper function to get the user object from it's ID
  */
 async function getUserFromId(userId) {
     const user = await User.findOne({ _id: userId });
@@ -56,8 +56,12 @@ async function getUserMiddleware(req, res, next) {
     req.user = user;
     next();
 }
+/**Helper function to get the Patinet ID 
+ * 
+*/
 async function getPatientMiddleware(req, res, next) {
     try {
+        // find if  the id is present or not
         const patientId = req.user.userId;
         const patient = await Patient.findOne({ _id: patientId });
 
@@ -72,6 +76,9 @@ async function getPatientMiddleware(req, res, next) {
         res.status(500).json({ message: 'Internal server error' });
     }
 }
+/**Helper function to get the doctor ID 
+ * 
+*/
 async function getDoctorMiddleware(req, res, next) {
     try {
         const doctorId = req.user.userId;

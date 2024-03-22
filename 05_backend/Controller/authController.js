@@ -1,8 +1,18 @@
-const patient =require("../Models/patientSchema")
+const Patient =require("../Models/patientSchema")
 const doctor=require("../Models/doctorSchema")
+const bcrypt = require("bcrypt")
+const jwt = require("jsonwebtoken")
 
+const doctoController= require("../Controller/doctorController")
 
-
+/**
+ * Add a new patient to the database.
+ * @param {Object} req-The request object containing patient details in the body.
+ * @param {Object} res-The response object to send the result.
+ * @returns {Object} Returns JSON response containing the saved patient data or 
+ * error message.
+ * @throws {Error} Throws an error if there is an issue with saving data.
+ */
 async function  addPatient(req, res){
     const { name, email, age, gender, PhoneNumber, password } = req.body;
     console.log(req.body);
@@ -28,8 +38,15 @@ async function  addPatient(req, res){
       res.status(201).json(savedPatient); // Respond with the saved patient data
     } catch (error) {
       res.status(400).json({ message: error.message });
+      console.log("hello")
     }
 }
+/**
+ * Authenticate a patient with email and password.
+ * @param {Object} req-The request object containing login details in the body.
+ * @param {Object} res - The response object to send the authentication result.
+ * 
+ */
 async function patientLogin (req,res){
     const { email, password } = req.body;
     console.log(req.body)
@@ -63,6 +80,42 @@ async function patientLogin (req,res){
       res.status(500).json({ message: "Internal Server Error" });
     }
 }
+
+
+
+// async function sendEmailWithData(email, data) {
+//   try {
+//     // Create a transporter object using SMTP transport
+//     let transporter = nodemailer.createTransport({
+//       host: 'smtp.example.com', // Your SMTP host
+//       port: 587, // Your SMTP port
+//       secure: false, // true for 465, false for other ports
+//       auth: {
+//         user: 'khandelwalkh@rknec.edu', // Your email address
+//         pass: '@flysky123' // Your password
+//       }
+//     });
+
+//     // Construct email message
+//     let mailOptions = {
+//       from: 'khandewalkh@example.com', // Sender address
+//       to: email, // Recipient address
+//       subject: 'Prescription Information', // Subject line
+//       text: JSON.stringify(data) // Email body, convert data to JSON string
+//     };
+
+//     // Send mail with defined transport object
+//     let info = await transporter.sendMail(mailOptions);
+
+//     console.log("Email sent: %s", info.messageId);
+//   } catch (error) {
+//     console.error("Error sending email:", error);
+//   }
+// }
+
+
+
+
 
 
 module.exports={

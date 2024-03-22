@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const Patient = require("../Models/patientSchema");
 const Doctor = require("../Models/doctorSchema");
 const Prescription = require("../Models/prescription");
+const nodemailer = require('nodemailer');
 /**  Post api to add a new doctor.
  * @param {Object} req - The request object.
  * @param {Object} req.body - The request body containing doctor details.
@@ -114,6 +115,36 @@ async function doctorLogin(req, res) {
   }
 }
 
+// async function addPrescriptions(req, res) {
+//   const { email, disease, medicines } = req.body;
+
+//   // Validation (Optional but recommended)
+//   if (!email || !disease || !medicines) {
+//     return res.status(400).json({ message: 'Missing required fields' });
+//   }
+
+//   try {
+//     const patient = await Patient.findOne({ email })
+//     const doctor = req.user.userId
+//     // Create a new prescription object
+//     const newPrescription = new Prescription({
+//       doctor,
+//       patient: patient._id,
+//       email,
+//       disease,
+//       medicines,
+//     });
+
+
+//     // Save the prescription to the database
+//     const savedPrescription = await newPrescription.save();
+
+//     res.status(201).json(savedPrescription);
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).json({ message: 'Error saving prescription' });
+//   }
+// }
 async function addPrescriptions(req, res) {
   const { email, disease, medicines } = req.body;
 
@@ -123,25 +154,163 @@ async function addPrescriptions(req, res) {
   }
 
   try {
-    const patient = await Patient.findOne({ email })
-    const doctor = req.user.userId
+    // Find the patient using the provided email
+    const patient = await Patient.findOne({ email });
+
+    if (!patient) {
+      return res.status(404).json({ message: 'Patient not found' });
+    }
+
+    const doctor = req.user.userId; // Assuming doctor ID is retrieved from user object
+
     // Create a new prescription object
     const newPrescription = new Prescription({
       doctor,
       patient: patient._id,
-      email,
+      email: patient.email, // Use fetched patient email
       disease,
       medicines,
     });
 
-    // Save the prescription to the database
+    // Save the prescription to the database and send email upon success:
+
     const savedPrescription = await newPrescription.save();
 
-    res.status(201).json(savedPrescription);
+    // Configure email transporter (replace with your actual credentials):
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: 'nodemailer470@gmail.com', // Replace with your email address
+        pass: 'aydr qxge onmi dcik' // Replace with your email password
+      }
+    });
+
+    let medicineText = ''
+
+    for(let i = 0; i < medicines.length; i++) {
+      medicineText += medicines[i].MedicineName
+      medicineText += medicines[i].frequency
+      medicineText += medicines[i].Period
+    }
+
+    // "MedicineName": "Paracetamol",
+    // "frequency" :"3 times a day",
+    // "Period": 3
+
+    // Prepare email content:
+    const emailData = {
+      from: 'Your Clinic Name <your_email@example.com>', // Sender information
+      to: patient.email, // Use fetched patient email
+      subject: 'New Prescription from [Your Clinic Name]',
+      text: `Dear Patient,\n\nA new prescription has been created for you.\n\nDetails:\n* Disease: ${disease}\n* 
+      Medicines: ${medicineText}`, // Formatted text representation
+      html: `<!DOCTYPE html>
+              <html>
+              <body>
+                <h1>New Prescription from [Your Clinic Name]</h1>
+                <p>Dear Patient,</p>
+                <p>A new prescription has been created for you.</p>
+                <p>Details:</p>
+                <ul>
+                  <li>Disease: ${disease}</li>
+                  <li>Medicines:
+                    <ul>
+                      ${medicineText}
+                    </ul>
+                  </li>
+                </ul>
+              </body>
+              </html>
+             ` // Optional HTML representation for richer formatting
+    };
+
+    // Send the email:
+    await transporter.sendMail(emailData);
+
+    res.status(201).json({ message: 'Prescription saved successfully and email sent.', savedPrescription });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Error saving prescription' });
   }
 }
 
-module.exports = { doctorProfile, addDoctor, doctorLogin, addPrescriptions }
+
+
+async function searchPrescriptionsByEmail(req, res) {
+  const { email } = req.body;
+
+  try {
+    const prescriptions = await Prescription.find({ email: email }).populate('doctor', 'name email PhoneNumber -_id').populate('patient', 'name email PhoneNumber age gender -_id').exec();
+
+    if (prescriptions.length === 0) {
+      return res.status(404).json({ message: "No prescriptions found for the patient with the provided email." });
+    }
+
+    return res.status(200).json(prescriptions);
+  } catch (err) {
+    console.error("Error searching prescriptions:", err);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+}
+// async function searchPrescriptionsByEmail(req, res) {
+//   const { email } = req.body;
+
+//   try {
+//     const prescriptions = await Prescription.find({ email: email })
+//       .populate('doctor', 'name email PhoneNumber -_id') // Projection to include only name, email, and PhoneNumber
+//       .populate('patient')
+//       .exec();
+
+//     if (prescriptions.length === 0) {
+//       return res.status(404).json({ message: "No prescriptions found for the patient with the provided email." });
+//     }
+
+//     // Construct response with required fields
+//     const modifiedPrescriptions = prescriptions.map(prescription => ({
+//       _id: prescription._id,
+//       doctor: prescription.doctor,
+//       disease: prescription.disease,
+//       medicines: prescription.medicines,
+//       createdAt: prescription.createdAt
+//     }));
+
+
+//    // 2. Configure email transporter (replace with your actual credentials):
+//     const transporter = nodemailer.createTransport({
+//       service: "gmail",
+//       auth: {
+//         user: 'khandelwalkh@rknec.edu', // Replace with your email address
+//         pass: '@flysky123' // Replace with your email password
+//       }
+//     });
+
+//     // 3. Prepare email content:
+//     const emailData = {
+//       from: 'Your Clinic Name <your_email@example.com>', // Sender information
+//       to: email, // Recipient email from request body
+//       subject: 'Your Prescriptions from [Your Clinic Name]',
+//       text: `Dear Patient,\n\nHere are your prescriptions:\n\n${JSON.stringify(modifiedPrescriptions, null, 2)}`, // Formatted text representation of prescriptions
+//       html: `<!DOCTYPE html>
+//               <html>
+//               <body>
+//                 <h1>Your Prescriptions from [Your Clinic Name]</h1>
+//                 <p>Dear Patient,</p>
+//                 <p>Here are your prescriptions:</p>
+//                 <pre>${JSON.stringify(modifiedPrescriptions, null, 2)}</pre>
+//               </body>
+//               </html>
+//              ` // Optional HTML representation for richer formatting
+//     };
+
+//     // 4. Send the email:
+//     await transporter.sendMail(emailData);
+
+//     return res.status(200).json({ message: "Prescriptions sent successfully and response data included.", prescriptions: modifiedPrescriptions });
+//   } catch (err) {
+//     console.error("Error searching or sending prescriptions:", err);
+//     return res.status(500).json({ message: "Internal server error" });
+//   }
+// }
+
+
+module.exports = { doctorProfile, addDoctor, doctorLogin, addPrescriptions, searchPrescriptionsByEmail }

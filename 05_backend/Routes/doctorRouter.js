@@ -11,6 +11,7 @@ router.get("/doctorProfile",verifyJwt, getDoctorMiddleware ,doctoController.doct
 router.post('/newdoctor',doctoController.addDoctor)
 router.post('/Doclogin',doctoController.doctorLogin)
 router.post("/prescriptions",verifyJwt,doctoController.addPrescriptions)
+router.post('/search',doctoController.searchPrescriptionsByEmail)
 
 module.exports = router;
 

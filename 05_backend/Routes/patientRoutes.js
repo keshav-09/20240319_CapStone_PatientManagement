@@ -9,6 +9,7 @@ const patientController= require("../Controller/patientController")
 
 
 
+
 // POST API to save patient data
 // router.post('/patients', async (req, res) => {
 //   const { name, email, age, gender, PhoneNumber, password } = req.body;
@@ -76,6 +77,7 @@ const patientController= require("../Controller/patientController")
 // });
 
 
-router.get("/pprofile", verifyJwt, getPatientMiddleware ,patientController.patientProfile )   
+router.get("/pprofile", verifyJwt, getPatientMiddleware ,patientController.patientProfile )  
+router.get("/patinetprescription",verifyJwt,getPatientMiddleware,patientController.prescriptionHistory) 
 
 module.exports = router;

@@ -25,10 +25,15 @@ const prescriptionSchema = new mongoose.Schema({
     ref: 'Doctor',
     required: true
   },
-  email: {
+  patient: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Patient',
     required: true
+  },
+  email:{
+    type:String,
+    required:true
+
   },
   disease:{
     type:String,
@@ -40,7 +45,9 @@ const prescriptionSchema = new mongoose.Schema({
   },
   medicines: [medicineSchema], // Array of medicines
   // Additional fields such as prescription date, notes, etc. can be added as needed
-}, { timestamps: true });
+},);
+
+
 
 const Prescription = mongoose.model('Prescription', prescriptionSchema);
 

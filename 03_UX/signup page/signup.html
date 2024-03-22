@@ -5,8 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Form</title>
     <link rel="stylesheet" href="signup.css">
+    <style>
+        
+    </style>
 </head>
 <body>
+
+<div class="nav">
+    <input type="checkbox" id="nav-check">
+    <div class="nav-header">
+        <div class="nav-title">
+            Management
+        </div>
+    </div>
+    <div class="nav-btn">
+        <label for="nav-check">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+    </div>
+
+    <div class="nav-links">
+        <a href="//github.io/jo_geek" target="_blank">Github</a>
+        <a href="http://stackoverflow.com/users/4084003/" target="_blank">Stackoverflow</a>
+        
+    </div>
+</div>
+
 
 <div class="form-container">
     <form id="registrationForm">
@@ -34,6 +60,17 @@
         <button type="submit">Register</button>
     </form>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const toggleButton = document.querySelector('.menu-toggle');
+        const menu = document.querySelector('.menu');
+
+        toggleButton.addEventListener('click', function () {
+            menu.classList.toggle('active');
+        });
+    });
+</script>
 
 </body>
 </html>

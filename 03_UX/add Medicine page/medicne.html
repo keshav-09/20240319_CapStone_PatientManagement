@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Prescription Form</title>
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        /* Container styles */
+        .container {
+            max-width: 800px;
+            margin: 7rem  auto;
+            padding: 1rem;
+            background-color: #f3eaea;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          
+        }
+
+        .container h2 {
+            margin-bottom: 1.5rem;
+        }
+
+        /* Input fields styles */
+        .input-fields {
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .input-fields input {
+            width: calc(50% - 1rem);
+            margin-right: 1rem;
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        /* Medicine table styles */
+        .medicine-table {
+            margin-bottom: 1.5rem;
+            overflow-x: auto;
+        }
+
+        .medicine-row {
+            display: flex;
+            margin-bottom: 0.5rem;
+        }
+
+        .medicine-row.header {
+            font-weight: bold;
+        }
+
+        .medicine-row input {
+            flex: 1;
+            padding: 0.5rem;
+            margin-right: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        /* Add more button styles */
+        .add-more button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .add-more button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Submit button styles */
+        .submit-btn {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background-color: #218838;
+        }
+
+        /* Media queries */
+        @media screen and (max-width: 768px) {
+            .input-fields input {
+                width: 100%;
+                margin-right: 0;
+            }
+        }
+
+        @media screen and (max-width: 576px) {
+            .input-fields input {
+                width: 100%;
+            }
+        }
+
+        @media screen and (max-width: 400px) {
+            .container {
+                padding: 0.5rem;
+            }
+
+            .input-fields input {
+                width: 100%;
+                margin-right: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Content -->
+    <div class="container">
+        <h2>Doctor Prescription Form</h2>
+        <!-- Input Fields -->
+        <div class="input-fields">
+            <input type="text" placeholder="Patient Name">
+            <input type="email" placeholder="Patient Email">
+            <input type="Disease" placeholder="Patient Disease">
+        </div>
+
+        <!-- Medicine Table -->
+        <div class="medicine-table" id="medicineTable">
+            <!-- <div class="medicine-row header">
+                <div>Medicine Name</div>
+                <div>Frequency</div>
+                <div>Period (Days)</div>
+                <div>Dosage</div>
+                <div>Action</div>
+            </div> -->
+            <!-- Sample row -->
+            <div class="medicine-row">
+                <div><input type="text" placeholder="Medicine Name"></div>
+                <div><input type="text" placeholder="Frequency"></div>
+                <div><input type="number" placeholder="Period in Days"></div>
+                <div><input type="text" placeholder="Dosage"></div>
+                <div><button onclick="removeMedicineRow(this)"><i class="fas fa-trash"></i></button></div>
+            </div>
+        </div>
+
+        <!-- Add More Button -->
+        <div class="add-more">
+            <button onclick="addMedicineRow()">+ Add More Medicine</button>
+            <button class="submit-btn">Submit Prescription</button>
+        </div>
+
+        <!-- Submit Button -->
+        
+    </div>
+
+    <!-- Script for adding/removing medicine rows -->
+    <script>
+        function addMedicineRow() {
+            const medicineTable = document.getElementById('medicineTable');
+            const newRow = document.createElement('div');
+            newRow.classList.add('medicine-row');
+            newRow.innerHTML = `
+                <div><input type="text" placeholder="Medicine Name"></div>
+                <div><input type="text" placeholder="Frequency"></div>
+                <div><input type="number" placeholder="Period in Days"></div>
+                <div><input type="text" placeholder="Dosage"></div>
+                <div><button onclick="removeMedicineRow(this)"><i class="fas fa-trash"></i></button></div>
+            `;
+            medicineTable.appendChild(newRow);
+        }
+
+        function removeMedicineRow(button) {
+            const rowToRemove = button.closest('.medicine-row');
+            rowToRemove.remove();
+        }
+    </script>
+</body>
+</html>

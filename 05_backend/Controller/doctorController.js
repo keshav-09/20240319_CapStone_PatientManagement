@@ -145,6 +145,11 @@ async function doctorLogin(req, res) {
 //     res.status(500).json({ message: 'Error saving prescription' });
 //   }
 // }
+
+/**
+ * Add the Prescrition for the patient and at the same time send mail and
+ * save in to the database
+ */
 async function addPrescriptions(req, res) {
   const { email, disease, medicines } = req.body;
 
@@ -176,17 +181,18 @@ async function addPrescriptions(req, res) {
 
     const savedPrescription = await newPrescription.save();
 
-    // Configure email transporter (replace with your actual credentials):
+    // mail id that sent the mail to the patient
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: 'nodemailer470@gmail.com', // Replace with your email address
-        pass: 'aydr qxge onmi dcik' // Replace with your email password
+        user: 'nodemailer470@gmail.com', 
+        //  Pass contain the App passwords 
+        pass: 'aydr qxge onmi dcik' 
       }
     });
 
     let medicineText = ''
-
+    //  SAVE THE MEDICINE DATA TO THE MEDICINETEXT TO PRINT IN THE MAIL
     for(let i = 0; i < medicines.length; i++) {
       medicineText += medicines[i].MedicineName
       medicineText += medicines[i].frequency
@@ -201,7 +207,7 @@ async function addPrescriptions(req, res) {
     const emailData = {
       from: 'Your Clinic Name <your_email@example.com>', // Sender information
       to: patient.email, // Use fetched patient email
-      subject: 'New Prescription from [Your Clinic Name]',
+      subject: 'New Prescription from Hospital',
       text: `Dear Patient,\n\nA new prescription has been created for you.\n\nDetails:\n* Disease: ${disease}\n* 
       Medicines: ${medicineText}`, // Formatted text representation
       html: `<!DOCTYPE html>
@@ -235,7 +241,7 @@ async function addPrescriptions(req, res) {
 }
 
 
-
+// This is api to search in the history page of the doctor by email id
 async function searchPrescriptionsByEmail(req, res) {
   const { email } = req.body;
 
@@ -252,9 +258,13 @@ async function searchPrescriptionsByEmail(req, res) {
     return res.status(500).json({ message: "Internal server error" });
   }
 }
+
+module.exports = { doctorProfile, addDoctor, doctorLogin, addPrescriptions, searchPrescriptionsByEmail }
+
+
+
 // async function searchPrescriptionsByEmail(req, res) {
 //   const { email } = req.body;
-
 //   try {
 //     const prescriptions = await Prescription.find({ email: email })
 //       .populate('doctor', 'name email PhoneNumber -_id') // Projection to include only name, email, and PhoneNumber
@@ -313,4 +323,3 @@ async function searchPrescriptionsByEmail(req, res) {
 // }
 
 
-module.exports = { doctorProfile, addDoctor, doctorLogin, addPrescriptions, searchPrescriptionsByEmail }

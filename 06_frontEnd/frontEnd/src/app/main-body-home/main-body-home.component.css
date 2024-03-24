@@ -1,0 +1,46 @@
+/* For all screen sizes */
+.main-body {
+    display: flex;
+    flex-direction: row; /* Initially display in a row */
+    justify-content: center; /* Align horizontally */
+    align-items: center; /* Align vertically */
+     /* Optionally set the height to auto */
+    background-color: rgb(200, 234, 223);
+    height: 100%;
+
+}
+
+
+/* For screens smaller than 350px (typical mobile phones) */
+@media only screen and (max-width:500px) {
+    .main-body {
+        flex-direction: column; /* Change to column layout */
+       margin-top: 100px;
+    }
+ 
+}
+
+.image {
+    text-align: center; /* Center the image horizontally */
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* For screens smaller than 350px (typical mobile phones) */
+@media only screen and (max-width: 350px) {
+    .image img {
+        width: 80%; /* Set width to 80% for smaller screens */
+        max-width: 150px; /* Set maximum width for smaller screens */
+        display: block; /* Ensure image is centered */
+        margin: 0 auto; /* Center the image horizontally */
+    }
+}
+
+/* For screens larger than 350px (desktops, tablets, etc.) */
+@media only screen and (min-width: 351px) {
+    .image img {
+        width: 100%; /* Set width to 100% for larger screens */
+        max-width: 500px; /* Set maximum width for larger screens */
+    }
+}

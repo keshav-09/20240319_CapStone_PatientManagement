@@ -1,0 +1,41 @@
+.middle{
+    display: flex;
+    margin-top: 75px;
+    flex-wrap: wrap; /* Allow items to wrap to next line */
+    justify-content: center; /* Center items horizontally */
+    gap: 150px; /* Add some space between items */
+    /* background-color: aliceblue; */
+    height: fit-content;
+    height: auto;
+    align-items: center;
+}
+.card .text-center{
+    text-align: center;
+    text-decoration:wavy;
+    text-shadow: 2px 2px #1aba6f;
+    text-transform:unset;
+}
+.card {
+
+    background-color: rgb(187, 220, 230);
+    box-shadow:10px 10px 10px rgba(224, 158, 158, 0.2);
+    width:28%;
+    padding: 20px;
+    display: flex; /* Display card and image side by side */
+    flex-direction: column; /* Stack card content vertically */
+}
+
+.card-content {
+    width: 100%; /* Full width */
+}
+@media screen and (max-width: 768px) {
+    .middle {
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center items horizontally */
+        column-gap: 10px;
+        
+    }
+    .card, .image {
+        width: 80%; /* Full width on smaller screens */
+    }
+}

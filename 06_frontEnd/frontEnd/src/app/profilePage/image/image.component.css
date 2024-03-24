@@ -1,0 +1,12 @@
+.image {
+    width: 100%; /* Adjust width as needed */
+    max-width: 300px; /* Limit maximum width */
+    margin-top: 20px; /* Add some space */
+    align-self: center; /* Center the image vertically */
+  
+}
+
+.image img {
+    max-width: 100%; /* Make the image responsive */
+    height: auto; /* Maintain aspect ratio */
+}

@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 
+import { Router } from '@angular/router';
+
+
 @Component({
   selector: 'app-main-body-home',
   standalone: true,
@@ -8,5 +11,11 @@ import { Component } from '@angular/core';
   styleUrl: './main-body-home.component.css'
 })
 export class MainBodyHomeComponent {
+  constructor(private router: Router) {}
 
+  taketologin() {
+    this.router.navigate(['/login']);
+  }
+
+  
 }

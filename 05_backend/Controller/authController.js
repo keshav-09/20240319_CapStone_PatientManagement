@@ -63,8 +63,8 @@ async function patientLogin (req,res){
       // Compare the provided password with the password stored in the database
   
   
-  
-      if (!await bcrypt.compare(password, patient.password)) {
+      const isPasswordValid = await bcrypt.compare(password, patient.password) 
+      if (!isPasswordValid) {
         return res.status(401).json({ message: "Invalid email or password" });
       }
   

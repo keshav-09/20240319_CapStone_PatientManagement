@@ -10,13 +10,3 @@
     max-width: 100%; /* Make the image responsive */
     height: auto; /* Maintain aspect ratio */
 }
-
-
-.example-button-row button,
-.example-button-row a {
-  margin-right: 8px;
-}
-
-.example-disabled {
-  display: inline-block;
-}

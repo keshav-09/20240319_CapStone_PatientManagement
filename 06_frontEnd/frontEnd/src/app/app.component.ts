@@ -7,13 +7,22 @@ import { SignupPatientComponent } from './signup-patient/signup-patient.componen
 import { ProfileCardComponent } from './profilePage/profile-card/profile-card.component';
 import { ImageComponent } from './profilePage/image/image.component';
 import { PatientHistoryComponent } from './patient-history/patient-history.component';
+import { DoctorContainerComponent } from './profile-doctor/doctor-container/doctor-container.component';
 
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,NavBarComponent,MainBodyHomeComponent,LoginContainerComponent,SignupPatientComponent,ProfileCardComponent,ImageComponent,PatientHistoryComponent],
+  imports: [RouterOutlet,
+    NavBarComponent,
+    MainBodyHomeComponent,
+    LoginContainerComponent,
+    SignupPatientComponent,
+    ProfileCardComponent,
+    ImageComponent,
+    PatientHistoryComponent,
+  DoctorContainerComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

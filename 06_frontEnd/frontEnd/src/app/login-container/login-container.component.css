@@ -9,7 +9,7 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: #f6f8fa;
+    background: #f6f8fa;  
   }
   
   .wrapper {
@@ -52,7 +52,7 @@
     left: 5px;
     transform: translateY(-50%);
     font-size: 16px;
-    color: #fff;
+    /* color: #fff; */
     pointer-events: none;
     transition: .5s;
   }
@@ -82,9 +82,9 @@
     font-size: 14px;
   }
   
-  .remember label input {
+  /* .remember label input {
     accent-color: #0ef;
-  }
+  } */
   
   button {
     width: 100%;

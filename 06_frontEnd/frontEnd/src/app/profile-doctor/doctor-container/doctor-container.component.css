@@ -12,22 +12,37 @@
 .card .text-center{
     text-align: center;
     text-decoration:wavy;
-    text-shadow: 2px 2px #1aba6f;
+    text-shadow: 2px 2px #e2f3eb;
     text-transform:unset;
 }
 .card {
 
-    background-color: rgb(187, 220, 230);
+    background-color: rgb(182, 204, 209);
     box-shadow:10px 10px 10px rgba(224, 158, 158, 0.2);
     width:28%;
     padding: 20px;
     display: flex; /* Display card and image side by side */
     flex-direction: column; /* Stack card content vertically */
+    border-radius: 20px ;
 }
 
 .card-content {
     width: 100%; /* Full width */
 }
+.example-button-row {
+    display: flex;
+    gap: 20px; /* Adjust the value to set the desired gap size */
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  
+ 
+  
+  
+.mat-raised-button {
+    flex-grow: 1; /* Allow buttons to grow and fill the available space */
+  }
 @media screen and (max-width: 768px) {
     .middle {
         flex-direction: column; /* Stack items vertically */
@@ -38,4 +53,7 @@
     .card, .image {
         width: 80%; /* Full width on smaller screens */
     }
+    .example-button-row {
+        flex-direction: column; /* Stack buttons vertically on smaller screens */
+      }
 }

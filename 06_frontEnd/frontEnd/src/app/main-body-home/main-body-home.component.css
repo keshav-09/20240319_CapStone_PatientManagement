@@ -5,7 +5,7 @@
     justify-content: center; /* Align horizontally */
     align-items: center; /* Align vertically */
      /* Optionally set the height to auto */
-    background-color: rgb(200, 234, 223);
+    /* background-color: rgb(244, 248, 247); */
     height: 100%;
 
 }

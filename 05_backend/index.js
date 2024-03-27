@@ -12,10 +12,10 @@ const { connectToDatabase } = require("./Database/db");
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
+
 app.use("/auth",authRouter)
 app.use("/hospital", patientRouter);
 app.use("/doctor", doctorRouter)
-
 
 async function startServerAndDatabase() {
     await connectToDatabase();

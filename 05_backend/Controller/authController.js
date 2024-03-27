@@ -92,7 +92,7 @@ async function patientLogin (req,res){
 //       secure: false, // true for 465, false for other ports
 //       auth: {
 //         user: 'khandelwalkh@rknec.edu', // Your email address
-//         pass: '@flysky123' // Your password
+//         pass: '' // Your password
 //       }
 //     });
 

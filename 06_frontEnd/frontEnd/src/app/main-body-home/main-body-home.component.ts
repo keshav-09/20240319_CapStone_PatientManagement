@@ -12,9 +12,11 @@ import { Router } from '@angular/router';
 })
 export class MainBodyHomeComponent {
   constructor(private router: Router) {}
-
   taketologin() {
     this.router.navigate(['/login']);
+  }
+  takeToDoctorLogin() {
+    this.router.navigate(['/doctorLogin']);
   }
 
   

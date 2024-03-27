@@ -1,0 +1,51 @@
+
+<div class="body">
+    <div class="wrapper">
+        <div class="image">
+          <img src="assets/undraw_medical_care_movn.svg">
+        </div>
+        <div class="form-wrapper sign-in">
+          
+          <form 
+          [formGroup]="loginForm" 
+          (ngSubmit)="onSubmit()"
+          autocomplete="off"
+          action="registration_endpoint"
+          method="POST"
+          >
+            <h2>Login</h2>
+            <div class="input-group">
+              <input 
+              type="text"
+              placeholder="Email"
+              formControlName="email" 
+              [(ngModel)]="email"
+              >
+              <!-- <label for="">Email</label> -->
+            </div>
+            <div class="input-group">
+              <input 
+              name="password"
+              type="password"
+              formControlName="password"
+              required
+              placeholder="Password"
+              [(ngModel)]="password"
+            
+              >
+              <!-- <label for="">Password</label> -->
+            </div>
+            <!-- <div class="remember">
+              <label><input type="checkbox"> Remember me</label>
+            </div> -->
+            <button type="submit"
+            (click)="showAlert()"
+           
+            >Login</button>
+            <div class="signUp-link">
+              <p>Don't have an account? <a href="#" class="signUpBtn-link">Sign Up</a></p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>

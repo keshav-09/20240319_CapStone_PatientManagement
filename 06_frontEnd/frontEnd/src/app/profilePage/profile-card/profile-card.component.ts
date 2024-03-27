@@ -6,6 +6,7 @@ import {matTooltipAnimations, MatTooltipModule} from '@angular/material/tooltip'
 import {MatButtonModule} from '@angular/material/button';
 
 import { HttpClientModule, HttpClient, HttpResponse } from '@angular/common/http';
+import {  Router } from '@angular/router';
 @Component({
   selector: 'app-profile-card',
   standalone: true,
@@ -20,7 +21,8 @@ export class ProfileCardComponent implements OnInit {
   patientEmail: string="keshav@gmail.com";
   patientAge: Number=30;
   PhoneNumber: Number=1234567891;
-  constructor(private authService: AuthService,) { }
+ 
+  constructor(private authService: AuthService, private router:Router) { }
 
 
   ngOnInit(): void {
@@ -49,7 +51,7 @@ export class ProfileCardComponent implements OnInit {
   }
 
   taketohistorypage(){
-
+    this.router.navigate(['/patinetHistory']);
   }
 }
 

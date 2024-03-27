@@ -12,7 +12,7 @@ router.post('/patients',authController.addPatient)
 
 router.post("/login",authController.patientLogin)
 
-router.post("/sendmail",)
+// router.post("/sendmail", )
 // router.post('/patients', async (req, res) => {
 //     const { name, email, age, gender, PhoneNumber, password } = req.body;
 //     console.log(req.body);

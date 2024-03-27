@@ -1,0 +1,36 @@
+<div class="container">
+    <h2>Search Prescriptions</h2>
+    <div class="search-form">
+        <div class="form-group">
+            <label for="email">Enter Email ID:</label>
+            <input type="email" class="form-control" id="email" [(ngModel)]="email" #emailInput="ngModel" [required]="true" email>
+            <div *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)" class="error-message">
+                <div *ngIf="emailInput.errors?.['required']">Email is required.</div>
+                <div *ngIf="emailInput.errors?.['email']">Please enter a valid email address.</div>
+            </div>
+        </div>
+        <button class="btn btn-primary" [disabled]="emailInput.invalid" (click)="searchPrescriptions()">Search</button>
+    </div>
+
+    <hr>
+
+    <h2>Prescription List</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Disease</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let prescription of prescriptions; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ prescription.disease }}</td>
+                <td>{{ prescription.createdAt }}</td>
+                <td><button class="btn btn-secondary" (click)="showMedicineArray(prescription._id)">Show Medicine</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

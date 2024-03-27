@@ -1,0 +1,56 @@
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Enter Details</h5>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="email" class="form-label">Email ID</label>
+                    <input type="email" class="form-control" id="email" [(ngModel)]="email">
+                </div>
+                <div class="col-md-6">
+                    <label for="disease" class="form-label">Disease</label>
+                    <input type="text" class="form-control" id="disease" [(ngModel)]="disease">
+                </div>
+            </div>
+
+            <h5 class="card-title mt-4">Medicine Details</h5>
+            <div class="table-container"> <!-- Add this div -->
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Medicine</th>
+                            <th>Frequency</th>
+                            <th>Period</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let row of rows; let i = index">
+                            <td>
+                                <input type="text" class="form-control" name="medicine{{i}}" [(ngModel)]="row.medicine">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" name="frequency{{i}}"
+                                    [(ngModel)]="row.frequency">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" name="period{{i}}" [(ngModel)]="row.period">
+                            </td>
+                            <td>
+                                <button class="btn btn-danger" (click)="removeRow(i)">Remove</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="text-center">
+                <button class="btn btn-primary" (click)="addNewRow()">ADD more rows</button>
+                <button class="btn btn-primary" (click)="submitPrescription()">Submit Prescription</button>
+            </div>
+            <div *ngIf="prescriptionSubmitted" class="alert alert-success text-center mt-3">
+                Prescription submitted successfully!
+            </div>
+        </div>
+    </div>
+</div>

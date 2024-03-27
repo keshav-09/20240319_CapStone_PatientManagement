@@ -3,15 +3,18 @@
     </app-image-doctor>
     <div class="card">
         <div class="card-content">
-            <h2 class="text-center">Card</h2>
-            <p><strong>Name:</strong> John Doe</p>
-            <p><strong>Email:</strong> john.com</p>
-            <p><strong>Age:</strong> 30</p>
-            <p><strong>Gender:</strong> Male</p>
-            <p><strong>Phone Number:</strong> 1234567890</p>
-            <p><strong>Disease:</strong> Hypertension</p>
-            <p><strong>Prescription Date:</strong> March 22, 2024</p>
+            <h2 class="text-center">Doctor Card</h2>
+            <p><strong>Name:</strong> {{doctorName}}</p>
+            <p><strong>Email:</strong> {{doctorEmail}}</p>
+            <p><strong>Phone Number:</strong> {{PhoneNumber}}</p>
+            <p><strong>Specialty:</strong> {{specialty}}</p>
         </div>
+        <div class="example-button-row">
+            <a mat-raised-button class="button-gap" (click)="takeToMedicinePage()">Give Medicine</a>
+            <a mat-raised-button (click)="takeToHistory()">Patient History</a>
+          </div>
+          
     </div>
+    
 
 </div>

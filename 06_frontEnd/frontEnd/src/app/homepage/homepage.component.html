@@ -1,0 +1,10 @@
+<div class="form">
+    <p class="formname">Sign in...</p>
+    <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+        <input type="text" id="fname" name="email" formControlName="email" placeholder="Email..." (click)="changeBorderColor('email')">
+        <input type="password" id="lname" name="password" formControlName="password" placeholder="Password..." (click)="changeBorderColor('password')">
+        <input type="submit" value="Sign in" [disabled]="signInForm.invalid">
+    </form>
+    <h2><span>You Are New Patient</span></h2>
+    <input type="button" (click)="signupForPatient()" value="Sign up">
+</div>

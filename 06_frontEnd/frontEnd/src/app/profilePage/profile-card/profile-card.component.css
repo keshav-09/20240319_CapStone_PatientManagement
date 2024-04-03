@@ -1,6 +1,6 @@
 .middle{
     display: flex;
-    margin-top: 75px;
+    padding-top: 13%;
     flex-wrap: wrap; /* Allow items to wrap to next line */
     justify-content: center; /* Center items horizontally */
     gap: 150px; /* Add some space between items */

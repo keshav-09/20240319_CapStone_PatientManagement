@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup-patient',
   standalone: true,
-  imports: [ReactiveFormsModule,CommonModule],
+  imports: [ReactiveFormsModule,CommonModule,FormsModule,HttpClientModule ],
   templateUrl: './signup-patient.component.html',
   styleUrl: './signup-patient.component.css'
 })
@@ -24,72 +24,43 @@ import { Router } from '@angular/router';
 // }
 export class SignupPatientComponent {
   registrationForm: FormGroup;
-  Name:string='';
-  email:string='';
-  age:number=0;
-  gender:string='';
-  PhoneNumber :Number=0;
-  password:string=''  
 
-  constructor(private fb: FormBuilder, 
+  constructor(
+    private fb: FormBuilder,
     private http: HttpClient,
     private router: Router
-    ) {
+  ) {
     this.registrationForm = this.fb.group({
-      Name: ['', Validators.required],
-      age:[0,Validators.required],
-      gender:[''],
-      phoneNumber:[0],
+      name: ['', Validators.required],
+      age: [{ min: 1, max: 150 }],
+      gender: [''],
+      PhoneNumber: ['', [Validators.minLength(10), Validators.maxLength(10)]],
       email: ['', [Validators.required, Validators.email]],
-      password: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(8),
-          Validators.maxLength(200),
-          (control: { value: any }) => {
-            const passwordRegex =
-              /^(?=.*[A-Z])(?=.*[!@#$%^&()])(?=.*[0-9])(?!.*\s)(?!.*(\d)\1)/;
-            return passwordRegex.test(control.value)
-              ? null
-              : { invalidPassword: true };
-          },
-        ],
-      ],
-
-      confirmPassword: ['', Validators.required],
-      
-    },);
+      password: ['', [Validators.required, Validators.minLength(8)]]
+    });
   }
 
-
-
   onSubmit() {
-    const patientData={
-      name:this.Name,
-      email:this.email,
-      password:this.password,
-      age:this.age,
-      gender:this.gender,
-      phoneNumber:this.PhoneNumber,
+    if (this.registrationForm.invalid) {
+      this.showAlert();
+      return;
+    }
 
-    }; this.http.post('http://localhost:3000/auth/patients',patientData ).subscribe({
+    const patientData = this.registrationForm.value;
+
+    this.http.post('http://localhost:3000/auth/patients', patientData).subscribe({
       next: (response) => {
-        // Handle the response if needed
         console.log('Signup successful', response);
         this.router.navigate(['/login']);
       },
       error: (error) => {
-        // Handle any errors here
         console.error('Signup failed', error);
       },
-    })
-
+    });
   }
+
   showAlert() {
-    if (this.registrationForm.invalid) {
-      alert('Please fill all the fields correctly.');
-    }
+    alert('Please fill all the fields correctly.');
   }
 }
 

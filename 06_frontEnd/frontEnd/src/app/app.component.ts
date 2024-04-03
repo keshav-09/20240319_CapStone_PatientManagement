@@ -3,11 +3,12 @@ import { RouterOutlet } from '@angular/router';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { MainBodyHomeComponent } from './main-body-home/main-body-home.component';
 import { LoginContainerComponent } from './login-container/login-container.component';
-// import { SignupPatientComponent } from './signup-patient/signup-patient.component';
+import { SignupPatientComponent } from './signup-patient/signup-patient.component';
 import { ProfileCardComponent } from './profilePage/profile-card/profile-card.component';
 import { ImageComponent } from './profilePage/image/image.component';
 import { PatientHistoryComponent } from './patient-history/patient-history.component';
 import { DoctorContainerComponent } from './profile-doctor/doctor-container/doctor-container.component';
+import { HomepageComponent } from './homepage/homepage.component';
 
 
 
@@ -18,11 +19,11 @@ import { DoctorContainerComponent } from './profile-doctor/doctor-container/doct
     NavBarComponent,
     MainBodyHomeComponent,
     LoginContainerComponent,
-    // SignupPatientComponent,
+    SignupPatientComponent,
     ProfileCardComponent,
     ImageComponent,
     PatientHistoryComponent,
-  DoctorContainerComponent],
+  DoctorContainerComponent,HomepageComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

@@ -4,6 +4,7 @@ import {
   FormGroup,
   FormBuilder,
   Validators,
+  FormsModule
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -14,15 +15,14 @@ import { NgModule } from '@angular/core';
 @Component({
   selector: 'app-login-doctor',
   standalone: true,
-  imports: [ReactiveFormsModule,HttpClientModule,CommonModule],
+  imports: [ReactiveFormsModule,HttpClientModule,CommonModule,FormsModule],
   templateUrl: './login-doctor.component.html',
   styleUrl: './login-doctor.component.css',
   providers: [AuthService],
 })
 export class LoginDoctorComponent {
   loginForm: FormGroup;
-  email: string = '';
-  password: string = '';
+  loginError: string = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -36,35 +36,34 @@ export class LoginDoctorComponent {
     });
   }
 
+
   onSubmit() {
-    console.log('submit button is press');
-    console.log('Form submitted successfully!');
+    if (this.loginForm.invalid) {
+      return;
+    }
+
     const userData = {
-      email: this.email,
-      password: this.password,
+      email: this.loginForm.value.email,
+      password: this.loginForm.value.password,
     };
-    
-    this.http.
-    post<any>('http://localhost:3000/doctor/Doclogin', userData)
+
+    this.http
+      .post<any>('http://localhost:3000/doctor/Doclogin', userData)
       .subscribe({
-        next:  async (response) => {
+        next: async (response) => {
           console.log('Login Successful', response);
           const token = response.token;
           this.authService.setToken(token);
-          // Check if login was successful
           this.router.navigate(['/doctorProfile']);
-         
         },
         error: (error) => {
           console.error('Login failed:', error);
-          // Handle unsuccessful login (e.g., display error message)
-        }
+          this.loginError = 'Invalid email or password';
+        },
       });
   }
-  
-  showAlert() {
-    if (this.loginForm.invalid) {
-      alert('Please fill all the fields correctly.');
-    }
+  taketosignup()
+  {
+    this.router.navigate(['/signupforpatinent'])
   }
 }

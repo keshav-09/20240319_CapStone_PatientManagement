@@ -4,6 +4,8 @@ import {
   FormGroup,
   FormBuilder,
   Validators,
+  FormsModule,
+  FormControl,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -14,15 +16,18 @@ import { NgModule } from '@angular/core';
 @Component({
   selector: 'app-login-container',
   standalone: true,
-  imports: [ReactiveFormsModule,HttpClientModule,CommonModule],
+  imports: [ReactiveFormsModule,HttpClientModule,CommonModule,FormsModule],
   templateUrl: './login-container.component.html',
   styleUrl: './login-container.component.css',
   providers: [AuthService],
 })
 export class LoginContainerComponent {
+  
   loginForm: FormGroup;
-  email: string = '';
-  password: string = '';
+  loginError: string = '';
+  email:string='';
+  password:string='';
+  
 
   constructor(
     private formBuilder: FormBuilder,
@@ -36,31 +41,45 @@ export class LoginContainerComponent {
     });
   }
 
+
   onSubmit() {
-    console.log('submit button is press');
+    console.log('submit button is pressed');
     console.log('Form submitted successfully!');
+    
+    // Check if the form is invalid
+    if (this.loginForm.invalid) {
+      this.showAlert();
+      return;
+    }
+  
+    // Extract form values from the loginForm FormGroup
     const userData = {
-      email: this.email,
-      password: this.password,
+      email: this.loginForm.get('email')?.value,
+      password: this.loginForm.get('password')?.value,
     };
     
-    this.http.
-    post<any>('http://localhost:3000/auth/login', userData)
+    if (!userData.email || !userData.password) {
+      console.error('Invalid form control values');
+      return;
+    }
+    
+    this.http.post<any>('http://localhost:3000/auth/login', userData)
       .subscribe({
-        next:  async (response) => {
+        next: async (response) => {
           console.log('Login Successful', response);
           const token = response.token;
           this.authService.setToken(token);
           // Check if login was successful
           this.router.navigate(['/patinetProfile']);
-         
         },
         error: (error) => {
           console.error('Login failed:', error);
           // Handle unsuccessful login (e.g., display error message)
+          this.loginError = 'Invalid email or password.';
         }
       });
   }
+  
   
   showAlert() {
     if (this.loginForm.invalid) {

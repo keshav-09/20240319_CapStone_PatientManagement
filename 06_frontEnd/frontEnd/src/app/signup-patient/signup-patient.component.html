@@ -1,39 +1,51 @@
-<!-- <div class="form-container">
-    <form id="registrationForm" class="form" [formGroup]="registrationForm" (ngSubmit)="onSubmit()" method="POST">
-        <h2>Registration Form</h2>
-        <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" id="name" formControlName="Name" required>
+<div class="form-container">
+    <form id="registrationForm" class="form" (ngSubmit)="onSubmit()" [formGroup]="registrationForm">
+      <h2>Registration Form</h2>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required formControlName="name">
+        <div *ngIf="registrationForm.get('name')?.invalid && registrationForm.get('name')?.touched" class="error-message">
+          <div *ngIf="registrationForm.get('name')?.errors?.['required']">Name is required.</div>
         </div>
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input  [(ngModel)]="email"  type="email" id="email" formControlName="email" required>
-            <div *ngIf="registrationForm.get('email').invalid && registrationForm.get('email').touched" class="error-message">
-                <div *ngIf="registrationForm.get('email').errors?.required">Email is required.</div>
-                <div *ngIf="registrationForm.get('email').errors?.email">Please enter a valid email address.</div>
-            </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required formControlName="email">
+        <div *ngIf="registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched" class="error-message">
+          <div *ngIf="registrationForm.get('email')?.errors?.['required']">Email is required.</div>
+          <div *ngIf="registrationForm.get('email')?.errors?.['email']">Invalid email format.</div>
         </div>
-        <div class="form-group">
-            <label for="age">Age</label>
-            <input   [(ngModel)]="age" type="number" id="age" formControlName="age" required>
+      </div>
+      <div class="form-group">
+        <label for="age">Age</label>
+        <input type="number" id="age" name="age" required formControlName="age">
+        <div *ngIf="registrationForm.get('age')?.invalid && registrationForm.get('age')?.touched" class="error-message">
+          <div *ngIf="registrationForm.get('age')?.errors?.['required']">Age is required.</div>
         </div>
-        <div class="form-group">
-            <label for="PhoneNumber">Phone Number</label>
-            <input   [(ngModel)]="PhoneNumber" type="tel" id="PhoneNumber" formControlName="phoneNumber" required>
+      </div>
+      <div class="form-group">
+        <label for="PhoneNumber">Phone Number</label>
+        <input type="tel" id="PhoneNumber" name="PhoneNumber" required PhoneNumber="PhoneNumber">
+        <!-- Add validation messages for phone number if needed -->
+      </div>
+      
+      
+      <div class="form-group">
+        <label for="gender">Gender</label>
+        <input type="text" id="gender" name="gender" formControlName="gender">
+        <!-- Add validation messages for gender if needed -->
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required formControlName="password">
+        <div *ngIf="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched" class="error-message">
+          <div *ngIf="registrationForm.get('password')?.errors?.['required']">Password is required.</div>
+          <div *ngIf="registrationForm.get('password')?.errors?.['minlength']">Password must be at least 8 characters.</div>
+          <div *ngIf="registrationForm.get('password')?.errors?.['maxlength']">Password cannot exceed 200 characters.</div>
+          <div *ngIf="registrationForm.get('password')?.errors?.['invalidPassword']">Password must contain at least one uppercase letter, one special character, and one number.</div>
         </div>
-        <div class="form-group">
-            <label for="gender">Gender</label>
-            <input   [(ngModel)]="gender" type="text" id="gender" formControlName="gender" required>
-        </div>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input   [(ngModel)]="password" type="password" id="password" formControlName="password" required>
-            <div *ngIf="registrationForm.get('password').invalid && registrationForm.get('password').touched" class="error-message">
-                <div *ngIf="registrationForm.get('password').errors?.required">Password is required.</div>
-                <div *ngIf="registrationForm.get('password').errors?.minlength">Password must be at least 8 characters long.</div>
-                <div *ngIf="registrationForm.get('password').errors?.['invalidPassword']">Password must contain at least one uppercase letter, one number, and one special character.</div>
-            </div>
-        </div>
-        <button type="submit" [disabled]="registrationForm.invalid">Register</button>
+      </div>
+      <button type="submit">Register</button>
     </form>
-</div> -->
+  </div>
+  

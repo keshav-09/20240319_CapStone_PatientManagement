@@ -1,46 +1,53 @@
-/* For all screen sizes */
-.main-body {
+.div {
+    text-align: center;
+    margin-top: 0px; /* Adjust margin as needed */
+  }
+  
+  .div a {
+    margin-right: 3%; /* Adjust margin as needed */
+    border: none;
+    text-decoration: none;
+    color: rgb(99, 86, 10);
+  }
+  
+  hr {
+    height: 13px;
+    color: #a44242;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .div a {
+      margin-right: 0; /* Reset margin for smaller screens */
+    }
+  }
+  
+  .container {
     display: flex;
-    flex-direction: row; /* Initially display in a row */
-    justify-content: center; /* Align horizontally */
-    align-items: center; /* Align vertically */
-     /* Optionally set the height to auto */
-    /* background-color: rgb(244, 248, 247); */
-    height: 100%;
-
-}
-
-
-/* For screens smaller than 350px (typical mobile phones) */
-@media only screen and (max-width:500px) {
-    .main-body {
-        flex-direction: column; /* Change to column layout */
-       margin-top: 100px;
-    }
- 
-}
-
-.image {
-    text-align: center; /* Center the image horizontally */
-    margin-top: 50px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* For screens smaller than 350px (typical mobile phones) */
-@media only screen and (max-width: 350px) {
-    .image img {
-        width: 80%; /* Set width to 80% for smaller screens */
-        max-width: 150px; /* Set maximum width for smaller screens */
-        display: block; /* Ensure image is centered */
-        margin: 0 auto; /* Center the image horizontally */
-    }
-}
-
-/* For screens larger than 350px (desktops, tablets, etc.) */
-@media only screen and (min-width: 351px) {
-    .image img {
-        width: 100%; /* Set width to 100% for larger screens */
-        max-width: 500px; /* Set maximum width for larger screens */
-    }
-}
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%; /* Set width to 100% for responsiveness */
+    overflow: hidden;
+  }
+  
+  .image img {
+    width: 100%; /* Set maximum width to 100% */
+    height: auto;
+    margin-top: 100px;
+    /* background-color: #d4dbdf; */
+    border-radius: 200px;
+    
+    /* Remove float for better responsiveness */
+    /* Center the image horizontally */
+  }
+  
+  .container .text {
+    margin-top: 1em; /* Use relative units for responsiveness */
+    text-align: center;
+    margin-left: 10%;
+    margin-right: 10%;
+    color: 	#d6c18b;
+    font-variant: small-caps;
+    font-size: large;
+  }
+  

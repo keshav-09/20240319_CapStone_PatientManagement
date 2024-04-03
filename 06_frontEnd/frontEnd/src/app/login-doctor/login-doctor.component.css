@@ -1,149 +1,85 @@
+.body {
+  padding-top: 6%;
+  text-align: center;
+}
 
-/* Base styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+h2 {
+  color: 	#d6c18b;;
+  margin-top: 5%;
+  font-size: 30px;
+  margin-right: 24%;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+button {
+  width: 30%;
+  padding: 15px;
+  font-weight: 900;
+  font-size: large;
+  margin-top: 25px;
+  background-color: #4ca5af;
+  color: white;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  border: none;
+}
+
+.input-group {
+  text-align: center;
+  margin: 0 auto;
+  width: 30%;
+}
+
+input[type=text],
+input[type=password] {
+  width: 100%;
+  padding: 20px;
+  
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+input[type=text]:focus,
+input[type=password]:focus {
+  border-color: #4ca5af;
+  outline: none;
+  background-color: #f0f0f0;
+}
+h1{
+  width: 40%;
+  color: 	#d6c18b;
+  text-align: center;
+  border-bottom: 1px solid #000;
+  line-height: 0.1em;
+  margin: 40px 0px 2px;
+  margin-left: 30%;
+
+}
+
+h1 span {
+  background: #fbf9f9;
+  padding: 0 10px;
+}	
+
+
+/* Media query for smaller screens */
+@media screen and (max-width: 768px) {
   .body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: #f6f8fa;  
+    padding-top: 40%;
+    
   }
-  
-  .wrapper {
-    position: relative;
-    width: 100%;
-    max-width: 350px;
-    height: auto;
-    background: #747070;
-    box-shadow: 0 0 50px #0ef;
-    border-radius: 20px;
-    padding: 40px;
-    overflow: hidden;
+
+  h1 {
+    width: 90%;
+    margin-left: 2%;
+    font-size: medium;
   }
-  
-  .form-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    transition: 1s ease-in-out;
-  }
-  
-  /* Form styles */
-  h2 {
-    font-size: 30px;
-    color: #fff;
-    text-align: center;
-  }
-  
-  .input-group {
-    position: relative;
-    margin: 20px 0;
-    border-bottom: 2px solid #fff;
-  }
-  
-  .input-group label {
-    position: absolute;
-    top: 50%;
-    left: 5px;
-    transform: translateY(-50%);
-    font-size: 16px;
-    /* color: #fff; */
-    pointer-events: none;
-    transition: .5s;
-  }
-  
-  .input-group input {
-    width: 100%;
-    height: 40px;
-    font-size: 16px;
-    color: #fff;
-    padding: 0 5px;
-    background: transparent;
-    border: none;
-    outline: none;
-  }
-  
-  .input-group input:focus~label,
-  .input-group input:valid~label {
-    top: -5px;
-  }
-  
-  .remember {
-    margin: -5px 0 15px 5px;
-  }
-  
-  .remember label {
-    color: #fff;
-    font-size: 14px;
-  }
-  
-  /* .remember label input {
-    accent-color: #0ef;
-  } */
-  
+
   button {
-    width: 100%;
-    height: 40px;
-    background: #0ef;
-    box-shadow: 0 0 10px #0ef;
-    font-size: 16px;
-    color: #000;
-    font-weight: 500;
-    cursor: pointer;
-    border-radius: 30px;
-    border: none;
-    outline: none;
+    width: 80%;
   }
-  
-  .signUp-link {
-    font-size: 14px;
-    text-align: center;
-    margin: 15px 0;
+
+  .input-group {
+    width: 80%;
   }
-  
-  .signUp-link p {
-    color: #fff;
-  }
-  
-  .signUp-link p a {
-    color: #0ef;
-    text-decoration: none;
-    font-weight: 500;
-  }
-  
-  .signUp-link p a:hover {
-    text-decoration: underline;
-  }
-  
-  .image img {
-    max-width: 50%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-  }
-  
-  /* Media queries */
-  @media screen and (max-width: 768px) {
-    .wrapper {
-      width: 80%;
-      max-width: 500px;
-    }
-  }
-  
-  @media screen and (max-width: 576px) {
-    .wrapper {
-      width: 90%;
-      max-width: 90%;
-    }
-  
-    .input-group {
-      margin: 15px 0;
-    }
-  }
-  
+}

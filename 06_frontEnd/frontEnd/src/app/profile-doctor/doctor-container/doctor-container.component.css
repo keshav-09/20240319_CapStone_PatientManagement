@@ -1,13 +1,13 @@
 .middle{
     display: flex;
-    margin-top: 75px;
+    padding-top: 7%;
     flex-wrap: wrap; /* Allow items to wrap to next line */
     justify-content: center; /* Center items horizontally */
     gap: 150px; /* Add some space between items */
     /* background-color: aliceblue; */
-    height: fit-content;
-    height: auto;
     align-items: center;
+    height: calc(84vh + 1px);
+    background-color: rgb(255, 255, 255);
 }
 .card .text-center{
     text-align: center;
@@ -16,11 +16,14 @@
     text-transform:unset;
 }
 .card {
-
-    background-color: rgb(182, 204, 209);
-    box-shadow:10px 10px 10px rgba(224, 158, 158, 0.2);
+    background-color: rgb(254, 255, 255);
+    box-shadow:10px 10px 10px rgba(0, 0, 0, 0.2);
+    font-size: medium;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    height: 30%;
     width:28%;
-    padding: 20px;
+    padding: 50px;
+    color: rgb(202, 172, 135);
     display: flex; /* Display card and image side by side */
     flex-direction: column; /* Stack card content vertically */
     border-radius: 20px ;
@@ -31,27 +34,33 @@
 }
 .example-button-row {
     display: flex;
+    margin-top: 10px ;
     gap: 20px; /* Adjust the value to set the desired gap size */
     flex-wrap: wrap;
     justify-content: center;
+    padding-top: 0px ;
   }
-  
-  
- 
   
   
 .mat-raised-button {
     flex-grow: 1; /* Allow buttons to grow and fill the available space */
   }
+
 @media screen and (max-width: 768px) {
     .middle {
+        
         flex-direction: column; /* Stack items vertically */
         align-items: center; /* Center items horizontally */
         column-gap: 10px;
+        height: auto;
+        padding-top: 25px;
+        height: 100vh;
+        
+
         
     }
     .card, .image {
-        width: 80%; /* Full width on smaller screens */
+        width: 80%; /* Full width on smaller screens */ 
     }
     .example-button-row {
         flex-direction: column; /* Stack buttons vertically on smaller screens */

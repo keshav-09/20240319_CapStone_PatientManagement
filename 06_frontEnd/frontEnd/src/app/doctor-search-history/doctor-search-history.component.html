@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
     <h2>Search Prescriptions</h2>
     <div class="search-form">
         <div class="form-group">
@@ -33,4 +33,86 @@
             </tr>
         </tbody>
     </table>
+</div> -->
+<div class="search-container">
+    <h2>Search Prescriptions</h2>
+    <div class="search-form">
+        <div class="form-group">
+            <label for="email">Enter Email ID:</label>
+            <input type="email" class="form-control" id="email" [(ngModel)]="email">
+            <button class="btn btn-primary" (click)="searchPrescriptions()">Search</button>
+        </div>
+       
+    </div>
+
 </div>
+<div class="container">
+   
+
+    <h2>Prescription List</h2>
+    <div class="row">
+        <div class="col-md-6" *ngFor="let prescription of prescriptions; let i = index">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3 class="card-title">Prescription {{ i + 1 }}</h3>
+                </div>
+                <div class="card-body">
+                    <p><strong>Disease:</strong> {{ prescription.disease }}</p>
+                    <p><strong>Date:</strong> {{ prescription.createdAt | date }}</p>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Medicine Name</th>
+                                <th>Frequency</th>
+                                <th>Period</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let medicine of prescription.medicines">
+                                <td>{{ medicine.MedicineName }}</td>
+                                <td>{{ medicine.frequency }}</td>
+                                <td>{{ medicine.Period }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+
+<!-- <div class="container">
+    <h2>Search Prescriptions</h2>
+    <div class="search-form">
+        <div class="form-group">
+            <label for="email">Enter Email ID:</label>
+            <input type="email" class="form-control" id="email" [(ngModel)]="email" #emailInput="ngModel" [required]="true" email>
+            <div *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)" class="error-message">
+                <div *ngIf="emailInput.errors?.['required']">Email is required.</div>
+                <div *ngIf="emailInput.errors?.['email']">Please enter a valid email address.</div>
+            </div>
+        </div>
+        <button class="btn btn-primary" [disabled]="emailInput.invalid" (click)="searchPrescriptions()">Search</button>
+    </div>
+
+    <hr>
+
+   
+    <div class="form-group">
+        <label for="prescriptionSelect">Select Prescription:</label>
+        <select class="form-control" id="prescriptionSelect" [(ngModel)]="selectedPrescription">
+            <option *ngFor="let prescription of prescriptions" [value]="prescription">
+                {{ prescription.disease }} - {{ prescription.createdAt | date:'medium' }}
+            </option>
+        </select>
+    </div>
+
+   
+    <div *ngIf="selectedPrescription">
+        <h3>Selected Prescription:</h3>
+        <p><strong>Disease:</strong> {{ selectedPrescription?.disease }}</p>
+        <p><strong>Date:</strong> {{ selectedPrescription?.createdAt | date:'medium' }}</p>
+        <p><strong>Medicines:</strong> {{ selectedPrescription?.medicineNames }}</p>
+    </div>
+</div> -->

@@ -1,13 +1,45 @@
-<mat-toolbar class=" navbar">
+<!-- <mat-toolbar class=" navbar">
     <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
       <mat-icon>menu</mat-icon>
     </button>
     <span>My App</span>
     <span class="example-spacer"></span>
-    <!-- <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+  </mat-toolbar> -->
+<!-- <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
       <mat-icon>favorite</mat-icon>
     </button>
     <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
       <mat-icon>share</mat-icon>
     </button> -->
-  </mat-toolbar>
+
+
+<nav class="navbar">
+  <div class="navbar-container container">
+    <input type="checkbox" name="" id="">
+    <div class="hamburger-lines">
+      <span class="line line1"></span>
+      <span class="line line2"></span>
+      <span class="line line3"></span>
+    </div>
+    <ul class="menu-items">
+      <li><a (click)="takeToHome()" href="javascript:void(0);">
+        <svg xmlns="http://www.w3.org/2000/svg" width="0.9em" height="0.8em" viewBox="0 0 20 20">
+          <!-- SVG content --><path fill="currentColor" d="M8.5 4a.5.5 0 0 0-.5.5v3.001a.5.5 0 0 1-.5.5h-3a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5V4.5a.5.5 0 0 0-.5-.5zM7 4.5A1.5 1.5 0 0 1 8.5 3h3A1.5 1.5 0 0 1 13 4.5v2.501h2.5a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5H13v2.5a1.5 1.5 0 0 1-1.5 1.5h-3a1.5 1.5 0 0 1-1.5-1.5v-2.5H4.5a1.5 1.5 0 0 1-1.5-1.5v-3a1.5 1.5 0 0 1 1.5-1.5H7z"/>
+        </svg>
+          Home</a></li>
+      <li><a (click)="takeToDoctorLogin()" href="javascript:void(0);">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="0.8em" viewBox="0 0 20 20">
+          <!-- SVG content --><path fill="currentColor" d="M8.5 4a.5.5 0 0 0-.5.5v3.001a.5.5 0 0 1-.5.5h-3a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5V4.5a.5.5 0 0 0-.5-.5zM7 4.5A1.5 1.5 0 0 1 8.5 3h3A1.5 1.5 0 0 1 13 4.5v2.501h2.5a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5H13v2.5a1.5 1.5 0 0 1-1.5 1.5h-3a1.5 1.5 0 0 1-1.5-1.5v-2.5H4.5a1.5 1.5 0 0 1-1.5-1.5v-3a1.5 1.5 0 0 1 1.5-1.5H7z"/>
+        </svg>
+          Doctor</a></li>
+
+      <li><a (click)="taketologin()" href="javascript:void(0);">
+          <!-- Use javascript:void(0); to prevent traditional navigation -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="0.7em" height="0.8em" viewBox="0 0 20 20">
+            <!-- SVG content --><path fill="currentColor" d="M8.5 4a.5.5 0 0 0-.5.5v3.001a.5.5 0 0 1-.5.5h-3a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5V4.5a.5.5 0 0 0-.5-.5zM7 4.5A1.5 1.5 0 0 1 8.5 3h3A1.5 1.5 0 0 1 13 4.5v2.501h2.5a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5H13v2.5a1.5 1.5 0 0 1-1.5 1.5h-3a1.5 1.5 0 0 1-1.5-1.5v-2.5H4.5a1.5 1.5 0 0 1-1.5-1.5v-3a1.5 1.5 0 0 1 1.5-1.5H7z"/>
+          </svg>Patient</a></li>
+    </ul>
+
+    <h1 class="logo">DPConnection</h1>
+  </div>
+</nav>

@@ -15,22 +15,44 @@ import { FormsModule } from '@angular/forms'; // Import FormsModule
 export class DoctorSearchHistoryComponent {
   email: string = '';
   prescriptions: any[] = [];
-
+  selectedPrescription: any; 
   constructor(private http: HttpClient) { }
+  // searchPrescriptions() {
+  //   if (this.email.trim() === '') {
+  //     // Handle empty email input
+  //     return;
+  //   }
+  //   // Make API request to fetch prescriptions for the entered email
+  //   this.http.post<any[]>('http://localhost:3000/doctor/search', { email: this.email })
+  //     .subscribe(
+  //       (data) => {
+  //         this.prescriptions = data;
+  //         // Extract and display medicine names from the fetched data
+  //         this.prescriptions.forEach(prescription => {
+  //           prescription.medicineNames = prescription.medicines.map((medicine: { MedicineName: any; }) => medicine.MedicineName).join(', ');
+  //         });
+  //       },
+  //       (error) => {
+  //         console.error('Error fetching prescriptions:', error);
+  //       }
+  //     );
+  // }
+
+
   searchPrescriptions() {
-    if (this.email.trim() === '') {
-      // Handle empty email input
+    if (!this.email.trim()) {
+      console.error('Email is required.');
       return;
     }
-    // Make API request to fetch prescriptions for the entered email
+
     this.http.post<any[]>('http://localhost:3000/doctor/search', { email: this.email })
       .subscribe(
         (data) => {
           this.prescriptions = data;
-          // Extract and display medicine names from the fetched data
-          this.prescriptions.forEach(prescription => {
-            prescription.medicineNames = prescription.medicines.map((medicine: { MedicineName: any; }) => medicine.MedicineName).join(', ');
+          this.prescriptions.sort((a, b) => {
+            return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
           });
+
         },
         (error) => {
           console.error('Error fetching prescriptions:', error);

@@ -1,19 +1,15 @@
-/* Add your CSS styles here */
-body, html {
-    height: 100%;
-    margin: 0;
-    font-family: Arial, sans-serif;
-}
 
-.form-container {
+
+  .form-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
     background-color: rgb(255, 255, 255);
-}
+    padding-top: 10%;
+  }
 
-form {
+  form {
     border: 1px solid #ddd;
     padding: 20px;
     box-shadow: 0 0 10px #cbe8f1;
@@ -21,29 +17,29 @@ form {
     width: 100%;
     max-width: 400px;
     background-color: #b6c6cf;
-}
+  }
 
-.form-group {
+  .form-group {
     margin-bottom: 15px;
-}
+  }
 
-.form-group label {
+  .form-group label {
     display: block;
     margin-bottom: 5px;
-}
+  }
 
-.form-group input[type="text"],
-.form-group input[type="email"],
-.form-group input[type="password"],
-.form-group input[type="number"] {
+  .form-group input[type="text"],
+  .form-group input[type="email"],
+  .form-group input[type="password"],
+  .form-group input[type="number"] {
     width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
     box-sizing: border-box;
-}
+  }
 
-button {
+  button {
     background-color: #007bff;
     color: white;
     padding: 10px 20px;
@@ -51,18 +47,18 @@ button {
     border-radius: 4px;
     cursor: pointer;
     width: 100%;
-}
+  }
 
-button:hover {
+  button:hover {
     background-color: #0056b3;
-}
+  }
 
-@media screen and (max-width: 600px) {
+  @media screen and (max-width: 600px) {
     .form-container {
-        padding: 0 20px; /* Adjust padding for smaller screens */
+      padding: 0 20px;
     }
 
     form {
-        width: 100%;
+      width: 100%;
     }
-}
+  }

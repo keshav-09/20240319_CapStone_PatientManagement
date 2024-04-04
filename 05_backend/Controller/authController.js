@@ -38,7 +38,7 @@ async function  addPatient(req, res){
       res.status(201).json(savedPatient); // Respond with the saved patient data
     } catch (error) {
       res.status(400).json({ message: error.message });
-      console.log("hello")
+      console.log(error)
     }
 }
 /**

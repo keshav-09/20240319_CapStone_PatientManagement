@@ -47,6 +47,7 @@ export class SignupPatientComponent {
     }
 
     const patientData = this.registrationForm.value;
+    console.log(patientData)
 
     this.http.post('http://localhost:3000/auth/patients', patientData).subscribe({
       next: (response) => {

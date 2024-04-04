@@ -27,7 +27,6 @@ const doctorSchema = new mongoose.Schema({
   },
   PhoneNumber: {
     type: Number,
-    required: true,
     minlength: 10,
     maxlength: 10,
   },

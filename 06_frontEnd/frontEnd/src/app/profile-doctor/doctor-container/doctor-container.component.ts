@@ -6,7 +6,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {matTooltipAnimations, MatTooltipModule} from '@angular/material/tooltip';
 import {MatButtonModule} from '@angular/material/button';
 
-import { HttpClientModule, HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 import {  Router } from '@angular/router';
 import { ImageDoctorComponent } from '../image-doctor/image-doctor.component';
 
@@ -22,14 +22,19 @@ import { ImageDoctorComponent } from '../image-doctor/image-doctor.component';
 export class DoctorContainerComponent  implements OnInit {
   doctorName: string ="keshav";
   doctorEmail: string="keshav@gmail.com";
-  PhoneNumber: Number=1234567891;
+  phoneNumber: string="1234567891";
   specialty:string="Mbbs";
  
   constructor(private authService: AuthService, private router:Router) { }
 
 
   ngOnInit(): void {
-    this.authService.request('GET', `doctor/doctorProfile`).subscribe(
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+    this.authService.request('GET', `doctor/doctorProfile`,{headers}).subscribe(
       (response: HttpResponse<any>) => {
         
 
@@ -43,9 +48,9 @@ export class DoctorContainerComponent  implements OnInit {
         console.log(response)
         this.doctorName=response.body.name
         this.doctorEmail=response.body.email
-        this.PhoneNumber=response.body.PhoneNumber
+        this.phoneNumber=response.body.PhoneNumber
         this.specialty=response.body.specialty
-
+        console.log(this.phoneNumber)
 
       },
       (error) => {

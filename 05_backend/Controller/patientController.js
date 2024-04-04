@@ -19,8 +19,7 @@ async function  patientProfile(req, res){
         PhoneNumber,
         password
       } = patient;
-  
-  
+      
       res.status(200).json({
         name,
         email,

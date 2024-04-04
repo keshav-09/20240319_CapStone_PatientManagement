@@ -64,6 +64,6 @@ export class LoginDoctorComponent {
   }
   taketosignup()
   {
-    this.router.navigate(['/signupforpatinent'])
+    this.router.navigate(['/doctorsignup'])
   }
 }

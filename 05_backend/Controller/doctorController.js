@@ -62,6 +62,8 @@ async function doctorProfile(req, res) {
 
     } = currentDoctor;
 
+    console.log(currentDoctor)
+
     res.status(200).json({
       name,
       email,

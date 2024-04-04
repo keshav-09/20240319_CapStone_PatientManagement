@@ -9,19 +9,25 @@ import { PrescriptionFormComponent } from './prescription-form/prescription-form
 import { DoctorSearchHistoryComponent } from './doctor-search-history/doctor-search-history.component';
 import { SignupPatientComponent } from './signup-patient/signup-patient.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import { DoctorSignupComponent } from './doctor-signup/doctor-signup.component';
+
 
 export const routes: Routes = [
     {path: '', component: MainBodyHomeComponent },
     {path:'login',component: LoginContainerComponent},
     {path:'doctorLogin',component:LoginDoctorComponent},
+    
     {path:'patinetProfile',component: ProfileCardComponent},
     {path:'patinetHistory',component:PatientHistoryComponent},
     {path:"doctorProfile",component:DoctorContainerComponent},
     {path:"addmedicine",component:PrescriptionFormComponent},
     {path:"searchDoctor",component:DoctorSearchHistoryComponent},
     {path:"signupforpatinent",component:SignupPatientComponent},
+   
     {path:"home",component:MainBodyHomeComponent},
-    {path:"newlogin",component:HomepageComponent}
+    {path:"newlogin",component:HomepageComponent},
+    {path:"doctorsignup",component:DoctorSignupComponent}
+
 
 
 ];

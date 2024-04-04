@@ -80,6 +80,10 @@ export class LoginContainerComponent {
       });
   }
   
+  taketosignups()
+  {
+    this.router.navigate(['/signupforpatinent'])
+  }
   
   showAlert() {
     if (this.loginForm.invalid) {

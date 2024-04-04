@@ -1,19 +1,15 @@
 <div class="middle">
-    <app-image>
-    </app-image>
+    <app-image></app-image>
     <div class="card">
         <div class="card-content">
-            <h2 class="text-center">Card</h2>
-            <p><strong>Name:</strong> {{ patientName}}</p>
-            <p><strong>Email:</strong>{{patientEmail}}</p>
-            <p><strong>Age:</strong> {{patientAge}}</p>
-            <p><strong>Phone Number:</strong> {{PhoneNumber}}</p>
+            <h2 class="text-center">Profile</h2>
+            <p><strong>Name:</strong> {{ patientName }}</p>
+            <p><strong>Email:</strong> {{ patientEmail }}</p>
+            <p><strong>Age:</strong> {{ patientAge }}</p>
+            <p><strong>Phone Number:</strong> {{ phoneNumber }}</p>
             <div class="example-button-row">
-               
-                <a (click)='taketohistorypage()'mat-raised-button routerLink="taketohistorypage">Prescription History</a>
-              </div>
-               
+                <button mat-raised-button (click)="taketohistorypage()">Prescription History</button>
+            </div>
         </div>
     </div>
-
 </div>

@@ -14,6 +14,7 @@ import { CommonModule } from '@angular/common';
 })
 export class DoctorSignupComponent implements OnInit {
   registrationForm!: FormGroup;
+  submitted: boolean = false;
  
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router) { }
@@ -23,28 +24,31 @@ export class DoctorSignupComponent implements OnInit {
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       gender: ['', Validators.required],
-      phoneNumber: ['', Validators.required],
+      phoneNumber: ['', Validators.required, Validators.pattern(/^\d{10}$/)],
       specialty: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.required,Validators.minLength(8)]
     });
   }
 
   onSubmit() {
-    if (this.registrationForm.valid) {
-      const formData = this.registrationForm.value;
-      this.http.post<any>('http://localhost:3000/doctor/newdoctor', formData).subscribe(
-        response => {
-          console.log('Registration successful:', response);
-          // Reset the form after successful registration
-          this.registrationForm.reset();
-          this.router.navigate(['/doctorLogin']);
-        },
-        (error: HttpErrorResponse) => {
-          console.error('Registration failed:', error);
-        }
-      );
-    } else {
-      console.log('Form is invalid');
+    this.submitted = true;
+    if (this.registrationForm.invalid) {
+      console.log("Invalid form");
+      return
     }
+
+    const formData = this.registrationForm.value;
+    console.log(formData)
+    this.http.post<any>('http://localhost:3000/doctor/newdoctor', formData).subscribe(
+      response => {
+        console.log('Registration successful:', response);
+        // Reset the form after successful registration
+        this.registrationForm.reset();
+        this.router.navigate(['/doctorLogin']);
+      },
+      (error: HttpErrorResponse) => {
+        console.error('Registration failed:', error);
+      }
+    );
   }
 }

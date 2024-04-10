@@ -5,23 +5,23 @@
         <h2>Login</h2>
         <div class="input-group">
           <!-- Email input -->
-          <input type="text" formControlName="email" placeholder="Email">
+          <input type="text" id="email" formControlName="email" placeholder="Email">
           <!-- Email error message -->
-          <div *ngIf="loginForm.get('email')?.errors?.['required']" class="error-message">
-            
+          <div *ngIf="submitted && loginForm.get('email')?.errors?.['required']" class="error-message">
+            <span>Email is required.</span>
           </div>
-          <div *ngIf="loginForm.get('email')?.errors?.['email']" class="error-message">
+          <div *ngIf="submitted && loginForm.get('email')?.errors?.['email']" class="error-message">
             <span>Invalid email format.</span>
           </div>
         </div>
         <div class="input-group">
           <!-- Password input -->
-          <input type="password" formControlName="password" placeholder="Password">
+          <input type="password" id ='password' formControlName="password" placeholder="Password">
           <!-- Password error messages -->
-          <div *ngIf="loginForm.get('password')?.errors?.['required']" class="error-message">
-          
+          <div *ngIf="submitted && loginForm.get('password')?.errors?.['required']" class="error-message">
+            <span>Password is required.</span>
           </div>
-          <div *ngIf="loginForm.get('password')?.errors?.['minlength']" class="error-message">
+          <div *ngIf="submitted && loginForm.get('password')?.errors?.['minlength']" class="error-message">
             <span>Password must be at least 8 characters long.</span>
           </div>
         </div>
@@ -29,7 +29,7 @@
         <div *ngIf="loginError" class="error-message">
           <span>{{ loginError }}</span>
         </div>
-        <button type="submit">Login</button>
+        <button id="loginButton" type="submit">Login</button>
         <h1><span>You Are New Doctor</span></h1>
       </form>
       <button type="button" (click)="taketosignup()">Sign-up</button>

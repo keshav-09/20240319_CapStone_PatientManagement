@@ -9,15 +9,25 @@
     height: auto;
     align-items: center;
 }
+h2{
+padding-bottom: 20px;
+color: 	#d6c18b;;
+font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+p{
+    padding-top: 4px;
+    font: optional;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 .card .text-center{
     text-align: center;
     text-decoration:wavy;
-    text-shadow: 2px 2px #1aba6f;
+    text-shadow: 2px 2px #d2f4e4;
     text-transform:unset;
 }
 .card {
 
-    background-color: rgb(187, 220, 230);
+    background-color: rgb(230, 240, 243);
     box-shadow:10px 10px 10px rgba(224, 158, 158, 0.2);
     width:28%;
     padding: 20px;
@@ -26,8 +36,15 @@
     border-radius: 20px;
 }
 
+strong{
+    color: rgb(216, 167, 108);
+}
 .card-content {
     width: 100%; /* Full width */
+}
+.example-button-row{
+    padding-top: 20px;
+    text-align: center;
 }
 @media screen and (max-width: 768px) {
     .middle {

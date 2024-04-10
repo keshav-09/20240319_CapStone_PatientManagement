@@ -22,7 +22,7 @@ import { NgModule } from '@angular/core';
   providers: [AuthService],
 })
 export class LoginContainerComponent {
-  
+  submitted: boolean = false;
   loginForm: FormGroup;
   loginError: string = '';
   email:string='';
@@ -45,13 +45,13 @@ export class LoginContainerComponent {
   onSubmit() {
     console.log('submit button is pressed');
     console.log('Form submitted successfully!');
-    
+    this.submitted = true;
     // Check if the form is invalid
     if (this.loginForm.invalid) {
       this.showAlert();
       return;
     }
-  
+    this.submitted = false;
     // Extract form values from the loginForm FormGroup
     const userData = {
       email: this.loginForm.get('email')?.value,

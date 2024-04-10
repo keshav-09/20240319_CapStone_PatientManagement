@@ -2,47 +2,60 @@
     <form id="registrationForm" class="form" (ngSubmit)="onSubmit()" [formGroup]="registrationForm" autocomplete="off">
         <h2>Registration Form</h2>
         <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" required formControlName="name">
-            <div *ngIf="registrationForm.get('name')?.invalid && registrationForm.get('name')?.touched" class="error-message">
+            <!-- <label for="name">Name</label> -->
+            <input type="text" id="name" name="name" formControlName="name" placeholder="Name">
+            <div *ngIf="registrationForm.get('name')?.errors?.['required'] && registrationForm.get('name')?.touched" class="error-message">
                 Name is required
             </div>
         </div>
         <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required formControlName="email">
-            <div *ngIf="registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched" class="error-message">
-                Email is required and must be a valid email address
+            <!-- <label for="email">Email</label> -->
+            <input type="email" id="email" name="email" formControlName="email" placeholder="Email ">
+            <div *ngIf="registrationForm.get('email')?.errors?.['required'] && registrationForm.get('email')?.touched" class="error-message">
+                Email is required
+            </div>
+            <div *ngIf="registrationForm.get('email')?.errors?.['email'] && registrationForm.get('email')?.touched" class="error-message">
+                Please enter a valid email address
             </div>
         </div>
         <div class="form-group">
-            <label for="gender">Gender</label>
-            <input type="text" id="gender" name="gender" required formControlName="gender">
-            <div *ngIf="registrationForm.get('gender')?.invalid && registrationForm.get('gender')?.touched" class="error-message">
+            <!-- <label for="gender">Gender</label> -->
+            <input type="text" id="gender" name="gender" formControlName="gender" placeholder="Gender">
+            <div *ngIf="registrationForm.get('gender')?.errors?.['required'] && registrationForm.get('gender')?.touched" class="error-message">
                 Gender is required
             </div>
         </div>
         <div class="form-group">
-            <label for="phoneNumber">Phone Number</label>
-            <input type="tel" id="phoneNumber" name="phoneNumber" required formControlName="phoneNumber">
-            <div *ngIf="registrationForm.get('phoneNumber')?.invalid && registrationForm.get('phoneNumber')?.touched" class="error-message">
+            <!-- <label for="phoneNumber">Phone Number</label> -->
+            <input type="text" id="phoneNumber" name="phoneNumber" formControlName="phoneNumber" pattern="^\d{10}$" placeholder="PhoneNumber ">
+            <div *ngIf="registrationForm.get('phoneNumber')?.errors?.['required'] && registrationForm.get('phoneNumber')?.touched" class="error-message">
                 Phone Number is required
             </div>
+            <div *ngIf="registrationForm.get('phoneNumber')?.errors?.['pattern'] && registrationForm.get('phoneNumber')?.touched" class="error-message">
+                Please enter a valid 10-digit phone number
+            </div>
         </div>
+        
         <div class="form-group">
-            <label for="specialty">Specialty</label>
-            <input type="text" id="specialty" name="specialty" required formControlName="specialty">
-            <div *ngIf="registrationForm.get('specialty')?.invalid && registrationForm.get('specialty')?.touched" class="error-message">
+            <!-- <label for="specialty">Specialty</label> -->
+            <input type="text" id="specialty" name="specialty" formControlName="specialty" placeholder="Specialty">
+            <div *ngIf="registrationForm.get('specialty')?.errors?.['required'] && registrationForm.get('specialty')?.touched" class="error-message">
                 Specialty is required
             </div>
         </div>
         <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" required formControlName="password">
-            <div *ngIf="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched" class="error-message">
+            <!-- <label for="password">Password</label> -->
+            <input type="password" id="password" name="password" formControlName="password" minlength="8" placeholder=" password">
+            <div *ngIf="registrationForm.get('password')?.errors?.['required'] && registrationForm.get('password')?.touched" class="error-message">
                 Password is required
             </div>
+            <div *ngIf="registrationForm.get('password')?.errors?.['minlength'] && registrationForm.get('password')?.touched" class="error-message">
+                Password must be at least 8 characters long
+            </div>
         </div>
-        <button type="submit">Register</button>
+        <button type="submit" [disabled]="registrationForm.invalid">Register</button>
+        <div *ngIf="registrationForm.invalid && submitted" class="error-message">
+            Please fill out all required fields correctly.
+        </div>
     </form>
 </div>

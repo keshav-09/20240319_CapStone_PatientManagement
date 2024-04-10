@@ -22,6 +22,7 @@ import { NgModule } from '@angular/core';
 })
 export class LoginDoctorComponent {
   loginForm: FormGroup;
+  submitted: boolean = false;
   loginError: string = '';
 
   constructor(
@@ -38,6 +39,7 @@ export class LoginDoctorComponent {
 
 
   onSubmit() {
+    this.submitted = true;
     if (this.loginForm.invalid) {
       return;
     }

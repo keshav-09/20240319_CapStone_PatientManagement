@@ -18,7 +18,7 @@ const nodemailer = require('nodemailer');
  * @param {Object} res - The response object.
  */
 async function addDoctor(req, res) {
-  const { name, email, gender, PhoneNumber, password, specialty } = req.body;
+  const { name, email, gender, phoneNumber, password, specialty } = req.body;
   console.log(req.body);
   // console.log(name)
 
@@ -32,7 +32,7 @@ async function addDoctor(req, res) {
       name,
       email,
       gender,
-      PhoneNumber,
+      PhoneNumber: phoneNumber,
       password: hashedPassword,
       specialty,
     });

@@ -32,8 +32,8 @@ export class SignupPatientComponent {
   ) {
     this.registrationForm = this.fb.group({
       name: ['', Validators.required],
-      age: [{ min: 1, max: 150 }],
-      gender: [''],
+      age: ['',Validators.required],
+      gender: ['',Validators.required],
       PhoneNumber: ['', [Validators.minLength(10), Validators.maxLength(10)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]]

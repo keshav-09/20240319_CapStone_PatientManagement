@@ -12,7 +12,15 @@
 .card .text-center{
     text-align: center;
     text-decoration:wavy;
-    text-shadow: 2px 2px #e2f3eb;
+    text-shadow: 
+    2px 0 0 #000, 
+    -2px 0 0 #000, 
+    0 2px 0 #000, 
+    0 -2px 0 #000, 
+    1px 1px #000, 
+    -1px -1px 0 #000, 
+    1px -1px 0 #000, 
+    -1px 1px 0 #000;
     text-transform:unset;
 }
 .card {

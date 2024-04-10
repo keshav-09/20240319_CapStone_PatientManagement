@@ -1,64 +1,117 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 
+.form-container {
+  width: 30%;
+  padding-top: 10%;
+  text-align: center;
+  padding-left: 35%;
+}
+.form-group{
+  padding-top: 10px;
+}
+
+h2 {
+  color: #d6c18b;
+  font-size: 30px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.form-group label {
+  color: gold;
+  font-weight: 700;
+
+}
+
+button {
+  width: 30%;
+  padding: 15px;
+  font-weight: 900;
+  font-size: large;
+  margin-top: 25px;
+  background-color: #4ca5af;
+  color: white;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  border: none;
+}
+
+.input-group {
+  text-align: center;
+  margin: 0 auto;
+  width: 100%;
+}
+
+input[type=text],
+input[type=password],
+input[type=email],
+input[type=textl],
+input[type=number] {
+  width: 100%;
+  padding: 20px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+input[type=text]:focus,
+input[type=password]:focus,
+input[type=email]:focus,
+input[type=text]:focus ,
+input[type=number]:focus
+
+{
+  border-color: #4ca5af;
+  outline: none;
+  background-color: #f0f0f0;
+}
+
+h1 {
+  width: 40%;
+  color: #d6c18b;
+  text-align: center;
+  border-bottom: 1px solid #000;
+  line-height: 0.1em;
+  margin: 40px 0px 2px;
+  margin-left: 30%;
+}
+
+h1 span {
+  background: #fbf9f9;
+  padding: 0 10px;
+}
+
+.error-message {
+  color: red;
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 768px) {
+  .container {
+    padding-top: 40%;
+  }
 
   .form-container {
-    display: flex;
-    justify-content: center;
     align-items: center;
-    height: 100%;
-    background-color: rgb(255, 255, 255);
-    padding-top: 10%;
+    width: 80%;
+    padding-top: 50%;
+    padding-left: 10%;
   }
 
-  form {
-    border: 1px solid #ddd;
-    padding: 20px;
-    box-shadow: 0 0 10px #cbe8f1;
-    border-radius: 5px;
-    width: 100%;
-    max-width: 400px;
-    background-color: #b6c6cf;
-  }
-
-  .form-group {
-    margin-bottom: 15px;
-  }
-
-  .form-group label {
-    display: block;
-    margin-bottom: 5px;
-  }
-
-  .form-group input[type="text"],
-  .form-group input[type="email"],
-  .form-group input[type="password"],
-  .form-group input[type="number"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box;
+  h1 {
+    width: 90%;
+    margin-left: 2%;
+    font-size: medium;
   }
 
   button {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    width: 100%;
+    width: 80%;
   }
 
-  button:hover {
-    background-color: #0056b3;
+  .input-group {
+    width: 80%;
   }
-
-  @media screen and (max-width: 600px) {
-    .form-container {
-      padding: 0 20px;
-    }
-
-    form {
-      width: 100%;
-    }
-  }
+}

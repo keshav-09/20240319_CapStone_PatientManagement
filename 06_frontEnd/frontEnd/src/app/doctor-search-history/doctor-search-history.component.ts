@@ -2,7 +2,7 @@ import { CommonModule, NgClass } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ComponentFixtureAutoDetect } from '@angular/core/testing';
-import { NgModel } from '@angular/forms';
+import { NgModel, Validators } from '@angular/forms';
 import { combineLatest } from 'rxjs';
 import { FormsModule } from '@angular/forms'; // Import FormsModule
 @Component({

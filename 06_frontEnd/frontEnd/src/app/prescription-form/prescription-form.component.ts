@@ -6,6 +6,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from '../auth.service';
 import { catchError, throwError } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-prescription-form',
   standalone: true,
@@ -21,7 +22,7 @@ export class PrescriptionFormComponent {
   email: string = ""
   prescriptionSubmitted: boolean = false;
 
-  constructor(private http: HttpClient,private authService: AuthService ) { }
+  constructor(private http: HttpClient,private authService: AuthService,private _snackBar: MatSnackBar ) { }
 
 
   removeRow(index: number) {
@@ -59,14 +60,22 @@ export class PrescriptionFormComponent {
       .pipe(
         catchError((error: HttpErrorResponse) => {
           console.error('Error adding prescription:', error);
+          if (error.status === 404 && error.error.message === 'Patient not found') {
+            this.openSnackBar('Email ID not found. Please enter a valid email ID.');
+          }
           return throwError(error);
         })
       )
       .subscribe((response: any) => {
-        console.log('Prescription added successfully:', response);
+
+        // console.log('Prescription added successfully:', response);
+
         this.resetForm(); // Reset form after successful submission
+        this.openSnackBar('Prescription submitted successfully!'); 
         this.prescriptionSubmitted = true;
+
       });
+    
   }
 
   //   if (this.authService.isAuthenticated()) {
@@ -88,6 +97,12 @@ export class PrescriptionFormComponent {
   //     // Handle unauthorized access
   //   }
   // }
+  openSnackBar(message: string) {
+    this._snackBar.open(message, 'Close', {
+      duration: 2000, // Duration in milliseconds
+      panelClass: ['custom-snackbar']
+    });
+  }
 
   resetForm() {
     this.disease = '';
@@ -97,5 +112,6 @@ export class PrescriptionFormComponent {
 
 
 }
+
 
 

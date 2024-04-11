@@ -196,7 +196,7 @@ async function addPrescriptions(req, res) {
     let medicineText = ''
     //  SAVE THE MEDICINE DATA TO THE MEDICINETEXT TO PRINT IN THE MAIL
     for(let i = 0; i < medicines.length; i++) {
-      medicineText += medicines[i].MedicineName
+      medicineText += medicines[i].MedicineName 
       medicineText += medicines[i].frequency
       medicineText += medicines[i].Period
     }
@@ -221,6 +221,7 @@ async function addPrescriptions(req, res) {
                 <p>Details:</p>
                 <ul>
                   <li>Disease: ${disease}</li>
+                  <hr>
                   <li>Medicines:
                     <ul>
                       ${medicineText}

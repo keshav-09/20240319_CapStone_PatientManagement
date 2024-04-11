@@ -48,9 +48,10 @@
                 <button class="btn btn-primary" (click)="addNewRow()">ADD more rows</button>
                 <button class="btn btn-primary" (click)="submitPrescription()">Submit Prescription</button>
             </div>
-            <div *ngIf="prescriptionSubmitted" class="alert alert-success text-center mt-3">
-                Prescription submitted successfully!
-            </div>
+            <ng-template>
+                <button mat-button (click)="openSnackBar('Prescription submitted successfully!')">Show Snackbar</button>
+            </ng-template>        
+            
         </div>
     </div>
 </div>

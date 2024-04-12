@@ -38,13 +38,21 @@
     <h2>Search Prescriptions</h2>
     <div class="search-form">
         <div class="form-group">
-            <input placeholder="Email of Patient" type="email" class="form-control" id="email" [(ngModel)]="email">
+            <input placeholder="Email of Patient" type="email" class="form-control" id="email" [(ngModel)]="email" #emailInput="ngModel" required email>
+            <!-- Add ngModel and email validation directives -->
+            <div *ngIf="emailInput && emailInput.errors && emailInput.errors['required'] && (emailInput.dirty || emailInput.touched)" class="text-danger">
+                <!-- Use bracket notation to access required property -->
+                Email is required.
+            </div>
+            <div *ngIf="emailInput && emailInput.errors && emailInput.errors['email'] && (emailInput.dirty || emailInput.touched)" class="text-danger">
+                <!-- Use bracket notation to access email property -->
+                Invalid email format.
+            </div>
         </div>
-        <button class="btn btn-primary" (click)="searchPrescriptions()">Search</button>
+        <button class="btn btn-primary" [disabled]="emailInput && emailInput.invalid" (click)="searchPrescriptions()">Search</button>
+        <!-- Disable the button if email is invalid -->
     </div>
 </div>
-
-
 <div class="container">
     <h2>Prescription List</h2>
     <div class="row">

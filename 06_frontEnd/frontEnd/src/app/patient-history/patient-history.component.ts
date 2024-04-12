@@ -33,18 +33,38 @@ export class PatientHistoryComponent {
   fetchPrescriptions() {
     const token = localStorage.getItem('token');
     
+    if (!token) {
+      console.error('Token not found.');
+      return;
+    }
+  
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-
-    this.http.get<any[]>('http://localhost:3000/hospital/patinetprescription', {
-      headers
-    })
-      .subscribe(data => {
-        console.log(data)
-        this.prescriptions = data;
-      }, error => {
-        console.error('Error fetching prescriptions:', error);
-      });
+  
+    this.http.get<any[]>('http://localhost:3000/hospital/patinetprescription', { headers })
+      .pipe(
+        map(data => {
+          // Remove time portion from createdAt and convert to Date object for sorting
+          return data.map(item => ({ ...item, createdAt: new Date(item.createdAt.split('T')[0]) }))
+                     .sort((a, b) => b.createdAt - a.createdAt);
+        })
+      )
+      .subscribe(
+        data => {
+          console.log('Prescriptions:', data);
+          this.prescriptions = data;
+        },
+        error => {
+          console.error('Error fetching prescriptions:', error);
+        }
+      );
   }
+  
+  
+  
+  
+  
+  
+  
 }

@@ -1,8 +1,8 @@
-  <div class="text">
-    <p> Prescription History Page </p>
-  </div> 
+<div class="text">
+  <p> Prescription History Page </p>
+</div>
+
 <div class="cards-container">
-  
   <div class="card" *ngFor="let prescription of prescriptions">
     <div class="card-content">
       <h2>Doctor Name</h2>
@@ -10,8 +10,11 @@
 
       <h2>Disease</h2>
       <p>{{ prescription.disease }}</p>
+
+      <!-- Display createdAt without time portion -->
       <h2>Created At</h2>
-      <p>{{ prescription.createdAt }}</p>
+      <p>{{ prescription.createdAt | date:'mediumDate' }}</p>
+
       <h2>Medicines</h2>
       <ul>
         <li *ngFor="let medicine of prescription.medicines">

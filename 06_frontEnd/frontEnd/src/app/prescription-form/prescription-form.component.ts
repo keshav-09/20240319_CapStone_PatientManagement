@@ -75,28 +75,11 @@ export class PrescriptionFormComponent {
         this.prescriptionSubmitted = true;
 
       });
+      
     
   }
 
-  //   if (this.authService.isAuthenticated()) {
-  //     this.http
-  //       .post('http://localhost:3000/doctor/prescriptions', prescriptionData)
-  //       .pipe(
-  //         catchError((error: HttpErrorResponse) => {
-  //           console.error('Error adding prescription:', error);
-  //           return throwError(error);
-  //         })
-  //       )
-  //       .subscribe((response: any) => {
-  //         console.log('Prescription added successfully:', response);
-  //         this.resetForm(); // Reset form after successful submission
-  //         this.prescriptionSubmitted = true;
-  //       });
-  //   } else {
-  //     console.error('User not authenticated');
-  //     // Handle unauthorized access
-  //   }
-  // }
+  
   openSnackBar(message: string) {
     this._snackBar.open(message, 'Close', {
       duration: 2000, // Duration in milliseconds

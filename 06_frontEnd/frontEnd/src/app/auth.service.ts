@@ -27,6 +27,13 @@ export class AuthService {
   isAuthenticated(): boolean {
     return !!this.getToken();
   }
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('token'); // Assuming you're storing token in localStorage
+  }
+
+  logout(): void {
+    localStorage.removeItem('token');
+  }
 
   request(method: string, url: string, data?: any): Observable<HttpResponse<any>> {
     const headers = new HttpHeaders({

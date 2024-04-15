@@ -8,11 +8,12 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, SortDirection } from '@angular/material/sort';
-import { catchError, merge, startWith, switchMap } from 'rxjs';
+import { catchError, merge, startWith, switchMap, throwError } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/internal/operators/map';
 import { of } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-patient-history',
@@ -24,7 +25,7 @@ import { CommonModule } from '@angular/common';
 export class PatientHistoryComponent {
   prescriptions: any[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private _snackBar: MatSnackBar ) { }
 
   ngOnInit(): void {
     this.fetchPrescriptions();
@@ -57,13 +58,24 @@ export class PatientHistoryComponent {
         },
         error => {
           console.error('Error fetching prescriptions:', error);
+          // alert('Error fetching prescriptions')
+          if (error.status===404 && error.error.message==='No prescriptions found for the patient.')
+            {
+              this.openSnackBar("No prescriptions found for the patient."); 
+            }
+            return throwError(error);// Return an empty array to prevent further errors
         }
       );
   }
   
   
   
-  
+  openSnackBar(message: string) {
+    this._snackBar.open(message, 'Close', {
+      duration: 2000, // Duration in milliseconds
+      panelClass: ['custom-snackbar']
+    });
+  }
   
   
   

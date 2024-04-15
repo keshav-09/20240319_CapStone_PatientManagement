@@ -3,10 +3,10 @@
     max-width: 300px; /* Limit maximum width */
     margin-top: 20px; /* Add some space */
     align-self: center; /* Center the image vertically */
-    background-color: rgb(255, 255, 255);
+    /* background-color: rgb(255, 255, 255); */
     border-radius: 50%;
     padding: 40px;
-    box-shadow:10px 10px 10px 10px rgba(150, 144, 144, 0.2);
+    /* box-shadow:10px 10px 10px 10px rgba(150, 144, 144, 0.2); */
 }
 
 .image img {

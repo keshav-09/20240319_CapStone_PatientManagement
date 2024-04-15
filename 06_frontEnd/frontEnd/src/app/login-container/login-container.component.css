@@ -4,7 +4,7 @@
 }
 
 h2 {
-  color: 	#d6c18b;;
+  color: 	#000000;;
   margin-top: 5%;
   font-size: 30px;
   margin-right: 24%;
@@ -47,7 +47,7 @@ input[type=password]:focus {
 }
 h1{
   width: 40%;
-  color: 	#d6c18b;
+  color: 	#020201;
   text-align: center;
   border-bottom: 1px solid #000;
   line-height: 0.1em;
@@ -60,7 +60,9 @@ h1 span {
   background: #fbf9f9;
   padding: 0 10px;
 }	
-
+.error-message{
+  color: red;
+}
 
 /* Media query for smaller screens */
 @media screen and (max-width: 768px) {

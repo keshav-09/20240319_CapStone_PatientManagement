@@ -8,15 +8,7 @@
 h2 {
     margin-bottom: 20px;
     color: #dbbe75;
-    text-shadow: 
-    2px 0 0 #000, 
-    -2px 0 0 #000, 
-    0 2px 0 #000, 
-    0 -2px 0 #000, 
-    1px 1px #000, 
-    -1px -1px 0 #000, 
-    1px -1px 0 #000, 
-    -1px 1px 0 #000;
+    
 }
 
 .search-form {
@@ -37,7 +29,6 @@ h2 {
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
-    border-radius: 5px;
     box-sizing: border-box;
 }
 input[type=text],
@@ -60,8 +51,8 @@ input[type=text],
   }
 
 .btn-primary {
-    background-color: #3578c0;
-    color: 	#d6c18b;
+    background-color: #4ca5af;
+    color: 	#f5f3ee;
     border: none;
     padding: 12px 20px;
     border-radius: 0px;
@@ -69,20 +60,12 @@ input[type=text],
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s ease;
-    text-shadow: 
-    2px 0 0 #000, 
-    -2px 0 0 #000, 
-    0 2px 0 #000, 
-    0 -2px 0 #000, 
-    1px 1px #000, 
-    -1px -1px 0 #000, 
-    1px -1px 0 #000, 
-    -1px 1px 0 #000;
+    
 }
 
-.btn-primary:hover {
+/* .btn-primary:hover {
     background-color: #0056b3;
-}
+} */
 
 .table-container {
     overflow-x: auto;
@@ -120,15 +103,7 @@ input[type=text],
 .container h2{
     text-align: center;
     padding-top: 30px;
-    text-shadow: 
-    2px 0 0 #000, 
-    -2px 0 0 #000, 
-    0 2px 0 #000, 
-    0 -2px 0 #000, 
-    1px 1px #000, 
-    -1px -1px 0 #000, 
-    1px -1px 0 #000, 
-    -1px 1px 0 #000;
+    
 }
 .card {
     width: 80%;
@@ -154,6 +129,7 @@ input[type=text],
 
 .card-body {
     padding: 1.25rem;
+  
 }
 
 .card-body p {
@@ -172,6 +148,9 @@ input[type=text],
 .table-bordered th,
 .table-bordered td {
     border: 1px solid #dee2e6;
+}
+.text-danger{
+ color: red;   
 }
 
 /* Responsive Styling */

@@ -76,3 +76,14 @@
     width: calc(100% - 20px); /* Adjust the width to show 1 card per row */
   }
 }
+
+
+.error-message {
+  background-color: #ffebee; /* Light red background */
+  color: #b71c1c; /* Dark red text color */
+  padding: 10px;
+  font-size: 20px ;
+  border-radius: 5px;
+  text-align: center;
+  margin-top: 13%; /* Adjust as needed */
+}

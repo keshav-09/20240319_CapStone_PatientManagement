@@ -4,7 +4,9 @@
 }
 
 h2 {
-  color: 	#d6c18b;;
+  /* color: 	#d6c18b;;
+   */
+  color: black;
   margin-top: 5%;
   font-size: 30px;
   margin-right: 24%;
@@ -47,12 +49,14 @@ input[type=password]:focus {
 }
 h1{
   width: 40%;
-  color: 	#d6c18b;
+  /* color: 	#d6c18b; */
+  color: #000;
   text-align: center;
   border-bottom: 1px solid #000;
   line-height: 0.1em;
   margin: 40px 0px 2px;
   margin-left: 30%;
+
 
 }
 

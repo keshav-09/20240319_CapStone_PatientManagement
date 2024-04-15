@@ -21,6 +21,7 @@
   
   .card-title {
     margin-bottom: 20px;
+    font-size: large;
   }
   
   .table-container {
@@ -44,17 +45,19 @@
   input[type="text"], input[type="email"] {
     width: 100%;
     padding: 8px;
+    padding-top: 10px;
+    margin-top: 10px;
     box-sizing: border-box;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    /* border-radius: 4px; */
   }
   
   .btn {
     margin-right: 10px;
   padding: 10px 20px;
   border: none;
-  border-radius: 20px;
-  background-color: #647587; /* Blue background color */
+  border-radius: 10px;
+  background-color:#4ca5af; /* Blue background color */
   color: white; /* White text color */
   font-weight: bold;
   cursor: pointer;
@@ -67,8 +70,24 @@
     background-color: #8badd0; /* Darker blue color on hover */
   }
   
-  
+
   .text-center {
     text-align: center;
     margin-top: 20px;
   }
+
+  .btn-danger{
+    /* background-color: #8badd0; */
+    text-align: center;
+    margin-top: 10px;
+    padding: 10px;
+  }
+
+
+input[type=text]:focus,
+input[type=email]:focus {
+  border-color: #4ca5af;
+  outline: none;
+
+  background-color: #f0f0f0;
+}

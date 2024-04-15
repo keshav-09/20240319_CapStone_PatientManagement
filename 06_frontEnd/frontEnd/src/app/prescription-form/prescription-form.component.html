@@ -8,7 +8,7 @@
                     <input type="email" class="form-control" id="email" [(ngModel)]="email">
                 </div>
                 <div class="col-md-6">
-                    <label for="disease" class="form-label">Disease</label>
+                    <label for="disease" class="form-label">Disease/Symptoms</label>
                     <input type="text" class="form-control" id="disease" [(ngModel)]="disease">
                 </div>
             </div>
@@ -45,7 +45,7 @@
             </div>
 
             <div class="text-center">
-                <button class="btn btn-primary" (click)="addNewRow()">ADD more rows</button>
+                <button class="btn btn-primary" (click)="addNewRow()">Add More Medicine </button>
                 <button class="btn btn-primary" (click)="submitPrescription()">Submit Prescription</button>
             </div>
             <ng-template>

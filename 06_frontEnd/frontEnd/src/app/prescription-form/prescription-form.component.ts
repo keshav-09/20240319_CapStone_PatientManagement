@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from '../auth.service';
 import { catchError, throwError } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+
 @Component({
   selector: 'app-prescription-form',
   standalone: true,
@@ -35,8 +36,18 @@ export class PrescriptionFormComponent {
       period: '' // Initialize period to empty string
     });
   }
+  checkEmptyFields() {
+    if (!this.email || !this.disease) {
+      this.openSnackBar('Please fill in all fields');
+      return true; // At least one field is empty
+    }
+    return false; // All fields are filled
+  }
 
   submitPrescription() {
+    if (this.checkEmptyFields()) {
+      return; // Stop form submission if any field is empty
+    }
     const medicines = this.rows.map(row => ({
       MedicineName: row.medicine,
       frequency: row.frequency,

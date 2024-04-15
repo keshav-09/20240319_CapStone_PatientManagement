@@ -9,7 +9,10 @@
     text-decoration: none;
     color: rgb(99, 86, 10);
   }
-  
+  h4{
+    font-size: 30px ;
+
+  }
   hr {
     height: 13px;
     color: #a44242;
@@ -40,14 +43,17 @@
     /* Remove float for better responsiveness */
     /* Center the image horizontally */
   }
+ 
   
   .container .text {
-    margin-top: 1em; /* Use relative units for responsiveness */
+    margin-top: 0.2em; /* Use relative units for responsiveness */
     text-align: center;
     margin-left: 10%;
     margin-right: 10%;
-    color: 	#d6c18b;
-    font-variant: small-caps;
+    /* color: 	#d6c18b; */
+    color: black;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* font-variant: small-caps; */
     font-size: large;
   }
   

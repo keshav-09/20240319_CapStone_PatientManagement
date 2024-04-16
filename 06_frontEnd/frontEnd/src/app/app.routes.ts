@@ -10,13 +10,14 @@ import { DoctorSearchHistoryComponent } from './doctor-search-history/doctor-sea
 import { SignupPatientComponent } from './signup-patient/signup-patient.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { DoctorSignupComponent } from './doctor-signup/doctor-signup.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 export const routes: Routes = [
     {path: '', component: MainBodyHomeComponent },
     {path:'login',component: LoginContainerComponent},
     {path:'doctorLogin',component:LoginDoctorComponent},
-    
+    {path:'dashboard',component:DashboardComponent},
     {path:'patinetProfile',component: ProfileCardComponent},
     {path:'patinetHistory',component:PatientHistoryComponent},
     {path:"doctorProfile",component:DoctorContainerComponent},

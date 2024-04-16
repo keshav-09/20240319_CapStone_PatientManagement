@@ -104,7 +104,7 @@ async function doctorLogin(req, res) {
     }
 
     // Generate a JWT token with the patient's ID
-    const token = jwt.sign({ userId: doctor._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ userId: doctor._id }, process.env.JWT_SECRET, { expiresIn: '4h' });
 
     // Return the token as a response
     console.log("TOKEN GENERATED");
@@ -260,7 +260,53 @@ async function searchPrescriptionsByEmail(req, res) {
   }
 }
 
-module.exports = { doctorProfile, addDoctor, doctorLogin, addPrescriptions, searchPrescriptionsByEmail }
+async function getAllDoctorNames(req, res) {
+  try {
+    // Find all doctors in the database
+    const doctors = await Doctor.find({}, 'name');
+
+    // Extract names from the doctors array
+    const doctorNames = doctors.map(doctor => doctor.name);
+
+    // Return the list of doctor names
+    res.status(200).json(doctorNames);
+  } catch (error) {
+    // Handle errors
+    console.error('Error fetching doctor names:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+}
+async function getAllDisease(req, res) {
+  try {
+    // Find all prescriptions in the database
+    const prescriptions = await Prescription.find({}, 'disease');
+
+    // Aggregate disease count
+    const diseaseCount = prescriptions.reduce((acc, prescription) => {
+      const disease = prescription.disease;
+      acc[disease] = (acc[disease] || 0) + 1;
+      return acc;
+    }, {});
+
+    // Convert disease count to pie chart format
+    const pieChartData = Object.entries(diseaseCount).map(([disease, count]) => ({
+      label: disease,
+      count: count
+    }));
+
+    // Return the pie chart data
+    res.status(200).json(pieChartData);
+  } catch (error) {
+    // Handle errors
+    console.error('Error fetching disease data:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+}
+// Assuming you're using Express.js
+
+
+
+module.exports = {getAllDisease, getAllDoctorNames,doctorProfile, addDoctor, doctorLogin, addPrescriptions, searchPrescriptionsByEmail }
 
 
 

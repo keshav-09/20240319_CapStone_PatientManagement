@@ -3,15 +3,89 @@ const router = express.Router();
 const Doctor = require('../Models/doctorSchema');
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
+const Prescription = require("../Models/prescription");
 
 const { verifyJwt, getUserMiddleware,getPatientMiddleware,getDoctorMiddleware } = require("../Dependencies/jwtHelpers");
 const doctoController= require("../Controller/doctorController")
 
+
 router.get("/doctorProfile",verifyJwt, getDoctorMiddleware ,doctoController.doctorProfile)
+
 router.post('/newdoctor',doctoController.addDoctor)
+
 router.post('/Doclogin',doctoController.doctorLogin)
+
 router.post("/prescriptions",verifyJwt,doctoController.addPrescriptions)
+
 router.post('/search',doctoController.searchPrescriptionsByEmail)
+router.get('/alldoctor',doctoController.getAllDoctorNames)
+router.get('/getAllDisease',doctoController.getAllDisease)
+
+// router.get('/doctor/getAllDisease', (req, res) => {
+//     const startDate = req.query.startDate;
+//     const endDate = req.query.endDate;
+
+//     // Use startDate and endDate to filter data from your database
+//     // Example: Fetch data between startDate and endDate from your database
+//     Prescription.find({ createdAt: { $gte: startDate, $lte: endDate }}, 'disease')
+//         .then(data => {
+//             res.status(200).json(data);
+//         })
+//         .catch(err => {
+//             console.error('Error fetching data:', err);
+//             res.status(500).json({ message: 'Internal Server Error' });
+//         });
+// });
+
+// Example server-side code (assuming you're using Express.js)
+// router.get('/doctor/getAllDisease', (req, res) => {
+//     const startDate = req.query.startDate;
+//     const endDate = req.query.endDate;
+  
+//     Prescription.find({
+//       createdAt: {
+//         $gte: new Date(startDate),
+//         $lte: new Date(endDate)
+//       }
+//     }, 'disease')
+//     .then(data => {
+//       res.status(200).json(data);
+//     })
+//     .catch(err => {
+//       console.error('Error fetching data:', err);
+//       res.status(500).json({ message: 'Internal Server Error' });
+//     });
+//   });
+router.get('/doctor/getAllDisease', (req, res) => {
+    const startDate = req.query.startDate;
+    const endDate = req.query.endDate;
+  
+    Prescription.aggregate([
+        {
+            $match: {
+                createdAt: {
+                    $gte: new Date(startDate),
+                    $lte: new Date(endDate)
+                }
+            }
+        },
+        {
+            $group: {
+                _id: '$disease',
+                count: { $sum: 1 }
+            }
+        }
+    ])
+    .then(data => {
+        res.status(200).json(data);
+    })
+    .catch(err => {
+        console.error('Error fetching data:', err);
+        res.status(500).json({ message: 'Internal Server Error' });
+    });
+});
+
+
 
 module.exports = router;
 

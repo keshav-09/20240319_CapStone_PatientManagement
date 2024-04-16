@@ -9,6 +9,7 @@ import { ImageComponent } from './profilePage/image/image.component';
 import { PatientHistoryComponent } from './patient-history/patient-history.component';
 import { DoctorContainerComponent } from './profile-doctor/doctor-container/doctor-container.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 
@@ -23,7 +24,7 @@ import { HomepageComponent } from './homepage/homepage.component';
     ProfileCardComponent,
     ImageComponent,
     PatientHistoryComponent,
-  DoctorContainerComponent,HomepageComponent],
+  DoctorContainerComponent,HomepageComponent,DashboardComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

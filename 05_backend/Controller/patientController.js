@@ -66,4 +66,39 @@ async function  patientProfile(req, res){
       return res.status(500).json({ message: "Internal server error" });
     }
   }
-module.exports = { patientProfile,prescriptionHistory };
+
+  // async function prescriptionPieChart(req, res) {
+  //   try {
+  //     const patientId = req.user.userId;
+  
+  //     // Retrieve prescriptions for the patient
+  //     const prescriptions = await Prescription.find({ patient: patientId });
+  
+  //     // Check if any prescriptions are found
+  //     if (prescriptions.length === 0) {
+  //       return res.status(404).json({ message: "No prescriptions found for the patient." });
+  //     }
+  
+  //     // Aggregate disease data for pie chart
+  //     const diseaseCount = prescriptions.reduce((acc, prescription) => {
+  //       const disease = prescription.disease;
+  //       acc[disease] = (acc[disease] || 0) + 1;
+  //       return acc;
+  //     }, {});
+  
+  //     // Convert disease count object to an array of objects
+  //     const pieChartData = Object.entries(diseaseCount).map(([disease, count]) => ({
+  //       disease,
+  //       count
+  //     }));
+  
+  //     // Send the pie chart data as response
+  //     return res.status(200).json(pieChartData);
+  //   } catch (err) {
+  //     console.error("Error fetching prescription data for pie chart:", err);
+  //     return res.status(500).json({ message: "Internal server error" });
+  //   }
+  // }
+  
+  module.exports = { patientProfile, prescriptionHistory };
+  

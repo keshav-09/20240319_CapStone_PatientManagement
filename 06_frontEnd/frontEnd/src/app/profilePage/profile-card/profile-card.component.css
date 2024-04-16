@@ -1,6 +1,6 @@
 .middle{
     display: flex;
-    padding-top: 13%;
+    padding-top: 16%;
     flex-wrap: wrap; /* Allow items to wrap to next line */
     justify-content: center; /* Center items horizontally */
     gap: 150px; /* Add some space between items */
@@ -30,7 +30,9 @@ p{
     background-color: rgb(230, 240, 243);
     box-shadow:10px 10px 10px rgba(224, 158, 158, 0.2);
     width:28%;
-    padding: 20px;
+    padding: 30px;
+    padding-top:50px;
+    padding-bottom: 50px  ;
     display: flex; /* Display card and image side by side */
     flex-direction: column; /* Stack card content vertically */
     border-radius: 20px;
@@ -40,7 +42,9 @@ strong{
     color: rgb(216, 167, 108);
 }
 .card-content {
-    width: 100%; /* Full width */
+    width: 100%;
+     /* Full width */
+
 }
 .example-button-row{
     padding-top: 20px;

@@ -1,0 +1,119 @@
+/* CSS to style the container div */
+.dashboard-container {
+    width: 50%; /* Adjust width as needed */
+    height: 600px; /* Adjust height as needed */
+}
+
+/* CSS to style the embedded iframe */
+.dashboard-iframe {
+    width: 100%;
+    height: 100%;
+    border: none; /* Remove iframe border */
+}
+
+.container {
+    padding-top: 10%;
+    /* width: 50%; */
+    display: flex;
+    
+}
+.right , .left {
+    width: 50%;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    margin-right: 10px;
+}
+
+.form-group .form-control {
+    flex: 0 0 150px;
+    text-align: center;
+    padding: 8px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 14px;
+    margin: 0 5px;
+}
+
+.btn-primary {
+    padding: 10px 20px;
+    /* border: none; */
+    border: 1px solid #ced4da;
+    
+    /* background-color: #007bff; */
+    background-color:#4ca5af;
+    cursor: pointer;
+    color: white;
+    transition: background-color 0.3s;
+    margin-left: 48%;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    text-align: center;
+ 
+}
+
+#myPieChart {
+    width: 100%;
+    height: auto;
+    margin-left: 20%;
+    padding-top: 10px;
+    max-width: 500px;
+    margin: 0 auto;
+    display: block;
+}
+
+/* Media query for smaller screen sizes */
+@media screen and (max-width: 768px) {
+    .dashboard-container {
+        height: auto; /* Adjust height for smaller screens */
+    }
+
+    .form-group {
+        width: 40%;
+        margin-top: 17%;
+        margin-left: 30%;
+        flex-wrap: wrap; /* Allow form group items to wrap on smaller screens */
+        justify-content: center; /* Center items horizontally */
+    }
+
+    .form-group .form-control {
+        flex: 0 0 100%; /* Make input fields take up full width on smaller screens */
+        margin: 5px 0; /* Adjust margin for smaller screens */
+    }
+
+    .btn-primary {
+        flex: 0 0 100%; /* Make button take up full width on smaller screens */
+        margin: 10px 0; /* Adjust margin for smaller screens */
+    }
+}
+
+
+.btn-primary:hover {
+    background-color: #6987a7; /* Darker background color on hover */
+}
+
+/* Add blue border color when input field is focused */
+.form-control:focus {
+    border-color: #007bff;
+    outline: none; /* Remove default focus outline */
+}
+h1{
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+
+
+
+
+

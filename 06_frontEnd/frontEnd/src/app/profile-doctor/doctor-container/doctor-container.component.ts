@@ -66,6 +66,9 @@ export class DoctorContainerComponent  implements OnInit {
   takeToHistory(){
     this.router.navigate(['/searchDoctor']);
   }
+  takeTodashboard(){
+    this.router.navigate(['/dashboard']);
+  }
 }
 
 

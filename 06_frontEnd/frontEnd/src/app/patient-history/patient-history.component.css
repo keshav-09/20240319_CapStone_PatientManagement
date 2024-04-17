@@ -87,3 +87,34 @@
   text-align: center;
   margin-top: 13%; /* Adjust as needed */
 }
+
+
+/* Styles for the full-page spinner */
+.full-page-spinner {
+  position: fixed; /* Position the spinner relative to the viewport */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent background */
+  z-index: 9999; /* Ensure it's on top of other elements */
+  display: flex; /* Center the spinner horizontally and vertically */
+  justify-content: center;
+  align-items: center;
+}
+
+/* Styles for the spinner itself */
+.spinner {
+  border: 8px solid #f3f3f3; /* Light grey border */
+  border-top: 8px solid #3498db; /* Blue border on top for spinning effect */
+  border-radius: 50%; /* Circle shape */
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite; /* Animation for spinning effect */
+}
+
+/* Keyframes for the spinning animation */
+@keyframes spin {
+  0% { transform: rotate(0deg); } /* Start position */
+  100% { transform: rotate(360deg); } /* End position (one full rotation) */
+}

@@ -19,7 +19,6 @@ async function  addPatient(req, res){
     // console.log(name)
   
     try {
-      // Create a new patient instance based on the request body
       // const newPatient = new Patient(req.body);
       const hashedPassword = await bcrypt.hash(password, 10);
   
@@ -33,9 +32,8 @@ async function  addPatient(req, res){
   
       });
       console.log(req.body)
-      // Save the patient data to the database
       const savedPatient = await newPatient.save();
-      res.status(201).json(savedPatient); // Respond with the saved patient data
+      res.status(201).json(savedPatient); 
     } catch (error) {
       res.status(400).json({ message: error.message });
       console.log(error)
@@ -52,72 +50,27 @@ async function patientLogin (req,res){
     console.log(req.body)
   
     try {
-      // Find the patient with the provided email
-      const patient = await Patient.findOne({ email: email });
-  
-      // If no patient is found, return an error
+     const patient = await Patient.findOne({ email: email });
       if (!patient) {
         return res.status(401).json({ message: "Invalid email or password" });
       }
-  
-      // Compare the provided password with the password stored in the database
-  
-  
+      /**
+       * Check the password is valid or not
+       */
       const isPasswordValid = await bcrypt.compare(password, patient.password) 
       if (!isPasswordValid) {
         return res.status(401).json({ message: "Invalid email or password" });
       }
   
-      // Generate a JWT token with the patient's ID
+      
       const token = jwt.sign({ userId: patient._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-  
-      // Return the token as a response
       console.log("TOKEN GENERATED");
       res.status(200).json({ token });
     } catch (error) {
-      // Handle errors
       console.error(error);
       res.status(500).json({ message: "Internal Server Error" });
     }
 }
-
-
-
-// async function sendEmailWithData(email, data) {
-//   try {
-//     // Create a transporter object using SMTP transport
-//     let transporter = nodemailer.createTransport({
-//       host: 'smtp.example.com', // Your SMTP host
-//       port: 587, // Your SMTP port
-//       secure: false, // true for 465, false for other ports
-//       auth: {
-//         user: 'khandelwalkh@rknec.edu', // Your email address
-//         pass: '' // Your password
-//       }
-//     });
-
-//     // Construct email message
-//     let mailOptions = {
-//       from: 'khandewalkh@example.com', // Sender address
-//       to: email, // Recipient address
-//       subject: 'Prescription Information', // Subject line
-//       text: JSON.stringify(data) // Email body, convert data to JSON string
-//     };
-
-//     // Send mail with defined transport object
-//     let info = await transporter.sendMail(mailOptions);
-
-//     console.log("Email sent: %s", info.messageId);
-//   } catch (error) {
-//     console.error("Error sending email:", error);
-//   }
-// }
-
-
-
-
-
-
 module.exports={
     addPatient,patientLogin
 }

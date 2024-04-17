@@ -23,11 +23,7 @@ async function addDoctor(req, res) {
   // console.log(name)
 
   try {
-
-    // Create a new patient instance based on the request body
-    // const newPatient = new Patient(req.body);
     const hashedPassword = await bcrypt.hash(password, 10);
-
     const newDoctor = new Doctor({
       name,
       email,
@@ -37,9 +33,9 @@ async function addDoctor(req, res) {
       specialty,
     });
     console.log(req.body)
-    // Save the patient data to the database
+ 
     const saveDoctor = await newDoctor.save();
-    res.status(201).json(saveDoctor); // Respond with the saved patient data
+    res.status(201).json(saveDoctor); 
   } catch (error) {
     res.status(400).json({ message: error.message });
     console.log("error")
@@ -96,9 +92,6 @@ async function doctorLogin(req, res) {
     }
 
     // Compare the provided password with the password stored in the database
-
-
-
     if (!await bcrypt.compare(password, doctor.password)) {
       return res.status(401).json({ message: "Invalid email or password" });
     }
@@ -111,7 +104,7 @@ async function doctorLogin(req, res) {
     res.status(200).json({ token });
   }
   catch (error) {
-    // Handle errors
+   
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
   }
@@ -155,7 +148,7 @@ async function doctorLogin(req, res) {
 async function addPrescriptions(req, res) {
   const { email, disease, medicines } = req.body;
 
-  // Validation (Optional but recommended)
+ 
   if (!email || !disease || !medicines) {
     return res.status(400).json({ message: 'Missing required fields' });
   }
@@ -168,7 +161,7 @@ async function addPrescriptions(req, res) {
       return res.status(404).json({ message: 'Patient not found' });
     }
 
-    const doctor = req.user.userId; // Assuming doctor ID is retrieved from user object
+    const doctor = req.user.userId; 
 
     // Create a new prescription object
     const newPrescription = new Prescription({
@@ -180,10 +173,8 @@ async function addPrescriptions(req, res) {
     });
 
     // Save the prescription to the database and send email upon success:
-
     const savedPrescription = await newPrescription.save();
-
-    // mail id that sent the mail to the patient
+    //  here is the mail id that sent the mail to the patient
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -194,11 +185,13 @@ async function addPrescriptions(req, res) {
     });
 
     let medicineText = ''
-    //  SAVE THE MEDICINE DATA TO THE MEDICINETEXT TO PRINT IN THE MAIL
+    //  SAVE THE MEDICINE DATA TO THE MEDICINE TEXT TO PRINT IN THE MAIL
     for(let i = 0; i < medicines.length; i++) {
       medicineText += `<li><b>${medicines[i].MedicineName}</b>: ${medicines[i].frequency}, ${medicines[i].Period} days</li>`;
     }
 
+    // medicine formate
+    
     // "MedicineName": "Paracetamol",
     // "frequency" :"3 times a day",
     // "Period": 3
@@ -228,10 +221,9 @@ async function addPrescriptions(req, res) {
                 </ul>
               </body>
               </html>
-             ` // Optional HTML representation for richer formatting
+             ` 
     };
 
-    // Send the email:
     await transporter.sendMail(emailData);
 
     res.status(201).json({ message: 'Prescription saved successfully and email sent.', savedPrescription });

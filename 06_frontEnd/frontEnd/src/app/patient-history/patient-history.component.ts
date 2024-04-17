@@ -24,12 +24,18 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class PatientHistoryComponent {
   prescriptions: any[] = [];
-
+  loading: boolean = false;
   constructor(private http: HttpClient,private _snackBar: MatSnackBar ) { }
 
   ngOnInit(): void {
-    this.fetchPrescriptions();
+    this.loading =true 
+    setTimeout(() => {
+      this.fetchPrescriptions();
+      this.loading = false;
+    }, 500); 
   }
+
+ 
 
   fetchPrescriptions() {
     const token = localStorage.getItem('token');

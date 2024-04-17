@@ -6,7 +6,6 @@ const patientRouter= require("../05_backend/Routes/patientRoutes")
 const doctorRouter=require("../05_backend/Routes/doctorRouter")
 const authRouter=require("../05_backend/Routes/authRouter")
 
-// Database connection
 const { connectToDatabase } = require("./Database/db");
 
 const app = express();

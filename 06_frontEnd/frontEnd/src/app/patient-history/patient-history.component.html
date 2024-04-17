@@ -2,9 +2,13 @@
   <p> Prescription History </p>
 </div>
 
-<div class="cards-container">
+<div class="full-page-spinner" *ngIf="loading">
+  <div class="spinner"></div>
+</div>
+
+<div class="cards-container" *ngIf="!loading">
   <!-- Check if prescriptions array is empty -->
-  <ng-container *ngIf="prescriptions.length > 0; else noPrescriptions">
+  <ng-container *ngIf="prescriptions && prescriptions.length > 0; else noPrescriptions">
     <!-- Display prescription cards -->
     <div class="card" *ngFor="let prescription of prescriptions">
       <div class="card-content">
@@ -27,11 +31,11 @@
       </div>
     </div>
   </ng-container>
-
-  <!-- Error message when no prescriptions are found -->
-  <ng-template #noPrescriptions>
-    <div class="error-message">
-      <p>No prescriptions found for the patient.</p>
-    </div>
-  </ng-template>
 </div>
+
+<!-- Error message when no prescriptions are found -->
+<ng-template #noPrescriptions>
+  <div class="error-message" *ngIf="!loading">
+    <p>No prescriptions found for the patient.</p>
+  </div>
+</ng-template>

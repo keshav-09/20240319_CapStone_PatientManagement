@@ -49,7 +49,7 @@ async function  patientProfile(req, res){
         return res.status(404).json({ message: "No prescriptions found for the patient." });
       }
   
-      // Construct response with prescription details and doctor's name
+
       const prescriptionHistory = prescriptions.map(prescription => ({
         _id: prescription._id,
         doctorName: prescription.doctor.name, 

@@ -24,7 +24,6 @@ export const routes: Routes = [
     {path:"addmedicine",component:PrescriptionFormComponent},
     {path:"searchDoctor",component:DoctorSearchHistoryComponent},
     {path:"signupforpatinent",component:SignupPatientComponent},
-   
     {path:"home",component:MainBodyHomeComponent},
     {path:"newlogin",component:HomepageComponent},
     {path:"doctorsignup",component:DoctorSignupComponent}

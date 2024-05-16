@@ -2,6 +2,7 @@ const doctor = require("../Models/doctorSchema")
 const { verifyJwt, getUserMiddleware, getPatientMiddleware } = require("../Dependencies/jwtHelpers");
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt');
+const { emailValidator } = require('../Dependencies/validators/loginvalidation')
 const Patient = require("../Models/patientSchema");
 const Doctor = require("../Models/doctorSchema");
 const Prescription = require("../Models/prescription");
@@ -33,9 +34,9 @@ async function addDoctor(req, res) {
       specialty,
     });
     console.log(req.body)
- 
+
     const saveDoctor = await newDoctor.save();
-    res.status(201).json(saveDoctor); 
+    res.status(201).json(saveDoctor);
   } catch (error) {
     res.status(400).json({ message: error.message });
     console.log("error")
@@ -104,47 +105,108 @@ async function doctorLogin(req, res) {
     res.status(200).json({ token });
   }
   catch (error) {
-   
+
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
   }
 }
 
-// async function addPrescriptions(req, res) {
-//   const { email, disease, medicines } = req.body;
-
-//   // Validation (Optional but recommended)
-//   if (!email || !disease || !medicines) {
-//     return res.status(400).json({ message: 'Missing required fields' });
-//   }
-
-//   try {
-//     const patient = await Patient.findOne({ email })
-//     const doctor = req.user.userId
-//     // Create a new prescription object
-//     const newPrescription = new Prescription({
-//       doctor,
-//       patient: patient._id,
-//       email,
-//       disease,
-//       medicines,
-//     });
-
-
-//     // Save the prescription to the database
-//     const savedPrescription = await newPrescription.save();
-
-//     res.status(201).json(savedPrescription);
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).json({ message: 'Error saving prescription' });
-//   }
-// }
 
 /**
- * Add the Prescrition for the patient and at the same time send mail and
- * save in to the database
+ * async function addPrescriptions(req, res) {
+  const { email, disease, medicines } = req.body;
+
+
+  if (!email || !disease || !medicines) {
+      return res.status(400).json({ message: 'Missing required fields' });
+    }
+    if (!emailValidator(email)) {
+      return res.status(400).json({ message: 'Invalid email' });
+    }
+  try {
+    // Find the patient using the provided email
+    const patient = await Patient.findOne({ email });
+
+    if (!patient) {
+      return res.status(404).json({ message: 'Patient not found' });
+    }
+
+    const doctor = req.user.userId; 
+
+    // Create a new prescription object
+    const newPrescription = new Prescription({
+      doctor,
+      patient: patient._id,
+      email: patient.email, // Use fetched patient email
+      disease,
+      medicines,
+    });
+
+    // Save the prescription to the database and send email upon success:
+    const savedPrescription = await newPrescription.save();
+    //  here is the mail id that sent the mail to the patient
+
+    const transporter = nodemailer.createTransport({
+
+      service: "gmail",
+      auth: {
+        user: 'nodemailer470@gmail.com', 
+        //  Pass contain the App passwords 
+        pass: 'aydr qxge onmi dcik' 
+      }
+    });
+
+    let medicineText = ''
+    //  SAVE THE MEDICINE DATA TO THE MEDICINE TEXT TO PRINT IN THE MAIL
+    for(let i = 0; i < medicines.length; i++) {
+      medicineText += `<li><b>${medicines[i].MedicineName}</b>: ${medicines[i].frequency}, ${medicines[i].Period} days</li>`;
+    }
+
+    // medicine formate
+
+    // "MedicineName": "Paracetamol",
+    // "frequency" :"3 times a day",
+    // "Period": 3
+
+    // Prepare email content:
+    const emailData = {
+      from: 'Your Clinic Name <your_email@example.com>', // Sender information
+      to: patient.email, // Use fetched patient email
+      subject: 'New Prescription from Hospital',
+      text: `Dear Patient,\n\nA new prescription has been created for you.\n\nDetails:\n* Disease: ${disease}\n* 
+      Medicines: ${medicineText}`, // Formatted text representation
+      html: `<!DOCTYPE html>
+              <html>
+              <body>
+                <h1>New Prescription from Kims hospital</h1>
+                <p>Dear Patient,</p>
+                <p>A new prescription has been created for you.</p>
+                <p>Details:</p>
+                <ul>
+                  <li>Disease: ${disease}</li>
+                  <hr>
+                  <li>Medicines:
+                    <ul>
+                      ${medicineText}
+                    </ul>
+                  </li>
+                </ul>
+              </body>
+              </html>
+             ` 
+    };  
+
+    await transporter.sendMail(emailData);
+
+    res.status(201).json({ message: 'Prescription saved successfully and email sent.', savedPrescription });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Error saving prescription' });
+  }
+}
+
  */
+
 async function addPrescriptions(req, res) {
   const { email, disease, medicines } = req.body;
 
@@ -152,6 +214,10 @@ async function addPrescriptions(req, res) {
   if (!email || !disease || !medicines) {
     return res.status(400).json({ message: 'Missing required fields' });
   }
+  if (!emailValidator(email)) {
+        return res.status(400).json({ message: 'Invalid email' });
+      }
+
 
   try {
     // Find the patient using the provided email
@@ -160,6 +226,7 @@ async function addPrescriptions(req, res) {
     if (!patient) {
       return res.status(404).json({ message: 'Patient not found' });
     }
+
 
     const doctor = req.user.userId; 
 
@@ -232,9 +299,112 @@ async function addPrescriptions(req, res) {
     res.status(500).json({ message: 'Error saving prescription' });
   }
 }
+/**
+ * async function addPrescriptions(req, res) {
+  const { email, disease, medicines } = req.body;
+  if (typeof req.body !== 'object') {
+    return res.status(404).json({ message: 'Data must be an object' });
+  }
+  // Check if required fields are present
+  if (!email || !disease || !medicines || !Array.isArray(medicines) || medicines.length === 0) {
+    return res.status(400).json({ message: 'Missing required fields' });
+  }
+
+  // Validate email format
+  if (!emailValidator(email)) {
+    return res.status(400).json({ message: 'Invalid email' });
+  }
+
+  // Check if medicines have required fields (MedicineName, frequency, Period)
+  const invalidMedicineFields = medicines.some(
+    (medicine) =>
+      !medicine.MedicineName ||
+      !medicine.frequency ||
+      !medicine.Period ||
+      typeof medicine.MedicineName !== 'string' ||
+      typeof medicine.frequency !== 'string' ||
+      typeof medicine.Period !== 'number'
+  );
+  const invalidPeriodType = medicines.some((medicine) => typeof medicine.Period !== 'number');
+  if (invalidPeriodType) {
+    return res.status(422).json({ message: 'Enter the Period in Number' });
+  }
 
 
-// This is api to search in the history page of the doctor by email id
+
+
+  try {
+    // Find the patient using the provided email
+    const patient = await Patient.findOne({ email });
+    if (!patient) {
+      return res.status(404).json({ message: 'Patient not found' });
+    }
+
+    const doctor = req.user.userId;
+    console.log(doctor)
+
+    // Create a new prescription object
+    const newPrescription = new Prescription({
+      doctor,
+      patient: patient._id,
+      email: patient.email,
+      disease,
+      medicines,
+    });
+
+    // Save the prescription to the database and send email upon success
+    const savedPrescription = await newPrescription.save();
+
+    // Send email to the patient
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'nodemailer470@gmail.com',
+        pass: 'aydr qxge onmi dcik',
+      },
+    });
+
+    let medicineText = '';
+    for (let i = 0; i < medicines.length; i++) {
+      medicineText += `<li><b>${medicines[i].MedicineName}</b>: ${medicines[i].frequency}, ${medicines[i].Period} days</li>`;
+    }
+
+    // Prepare email content
+    const emailData = {
+      from: 'Your Clinic Name <your_email@example.com>',
+      to: patient.email,
+      subject: 'New Prescription from Hospital',
+      text: `Dear Patient,\n\nA new prescription has been created for you.\n\nDetails:\n* Disease: ${disease}\n* Medicines: ${medicineText}`,
+      html: `<!DOCTYPE html>
+                <html> 
+                <body>
+                <h1>New Prescription from Kims hospital</h1>
+                <p>Dear Patient,</p>
+                <p>A new prescription has been created for you.</p>
+                <p>Details:</p>
+                <ul>
+                <li>Disease: ${disease}</li>
+                <hr>
+                <li>Medicines: <ul>${medicineText}</ul></li>
+                </ul>
+                </body>
+              </html>`,
+    };
+
+    await transporter.sendMail(emailData);
+    res.status(201).json({ message: 'Prescription saved successfully and email sent.', savedPrescription });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Error saving prescription' });
+  }
+}
+
+ */
+
+
+
+
+
 async function searchPrescriptionsByEmail(req, res) {
   const { email } = req.body;
 
@@ -298,7 +468,7 @@ async function getAllDisease(req, res) {
 
 
 
-module.exports = {getAllDisease, getAllDoctorNames,doctorProfile, addDoctor, doctorLogin, addPrescriptions, searchPrescriptionsByEmail }
+module.exports = { getAllDisease, getAllDoctorNames, doctorProfile, addDoctor, doctorLogin, addPrescriptions, searchPrescriptionsByEmail }
 
 
 

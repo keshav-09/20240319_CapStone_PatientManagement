@@ -3,6 +3,7 @@ const router = express.Router();
 const Doctor = require('../Models/doctorSchema');
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
+const jsPDF = require('jspdf');
 const Prescription = require("../Models/prescription");
 
 const { verifyJwt, getUserMiddleware,getPatientMiddleware,getDoctorMiddleware } = require("../Dependencies/jwtHelpers");
@@ -18,6 +19,7 @@ router.post('/Doclogin',doctoController.doctorLogin)
 router.post("/prescriptions",verifyJwt,doctoController.addPrescriptions)
 
 router.post('/search',doctoController.searchPrescriptionsByEmail)
+
 router.get('/alldoctor',doctoController.getAllDoctorNames)
 router.get('/getAllDisease',doctoController.getAllDisease)
 

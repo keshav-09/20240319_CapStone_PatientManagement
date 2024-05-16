@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "chart.js": "^4.4.2",
+    "jspdf": "^2.5.1",
     "jwt-decode": "^4.0.0",
     "ng2-charts": "^6.0.0"
   }

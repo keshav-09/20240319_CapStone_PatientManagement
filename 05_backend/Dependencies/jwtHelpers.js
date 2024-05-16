@@ -11,25 +11,6 @@ const mongoose = require("mongoose");
  * @param {Object} res - response object
  * @param {Function} next - next function to call
  */
-// async function verifyJwt(req, res, next) {
-//     // Token is of the format Bearer `token` in the headers
-//     const token = req.headers.authorization?.split(" ")[1];
-
-//     // If there is no token
-//     if (!token) {
-//         return res.status(401).json({ message: "Unauthorized, no JWT found." });
-//     }
-
-//     // Verify token
-//     try {
-//         const decoded = await jwt.verify(token, secret);
-//         // Sets user (ID) in the request object
-//         req.user = decoded;
-//         next();
-//     } catch (err) {
-//         return res.status(401).json({ message: "Unauthorized JWT" });
-//     }
-// }
 async function verifyJwt(req, res, next) {
     // Token is of the format Bearer `token` in the headers
     const token = req.headers.authorization?.split(" ")[1];
@@ -39,45 +20,64 @@ async function verifyJwt(req, res, next) {
         return res.status(401).json({ message: "Unauthorized, no JWT found." });
     }
 
+    // Verify token
     try {
-        // Verify JWT token
-        const decoded = jwt.verify(token, secret);
-
-        // If verification succeeds, set user ID in the request object
+        const decoded = await jwt.verify(token, secret);
+        // Sets user (ID) in the request object
         req.user = decoded;
-
-        // Proceed to next middleware
         next();
     } catch (err) {
-        if (err.name === 'TokenExpiredError') {
-            // JWT token has expired, check for refresh token
-            const refreshToken = req.headers.refresh_token;
-
-            if (!refreshToken) {
-                return res.status(401).json({ message: "Unauthorized, no refresh token found." });
-            }
-
-            try {
-                // Verify refresh token
-                const decodedRefreshToken = jwt.verify(refreshToken, secret);
-
-                // If verification succeeds, generate new JWT token and proceed
-                const newToken = jwt.sign({ userId: decodedRefreshToken.userId }, secret, { expiresIn: '1h' });
-
-                // Set new JWT token in response headers
-                res.setHeader('Authorization', `Bearer ${newToken}`);
-
-                // Proceed to next middleware
-                next();
-            } catch (error) {
-                return res.status(401).json({ message: "Unauthorized, invalid refresh token." });
-            }
-        } else {
-            // Other JWT verification errors
-            return res.status(401).json({ message: "Unauthorized JWT" });
-        }
+        return res.status(401).json({ message: "Unauthorized JWT" });
     }
 }
+// async function verifyJwt(req, res, next) {
+//     // Token is of the format Bearer `token` in the headers
+//     const token = req.headers.authorization?.split(" ")[1];
+
+//     // If there is no token
+//     if (!token) {
+//         return res.status(401).json({ message: "Unauthorized, no JWT found." });
+//     }
+
+//     try {
+//         // Verify JWT token
+//         const decoded = jwt.verify(token, secret);
+
+//         // If verification succeeds, set user ID in the request object
+//         req.user = decoded;
+
+//         // Proceed to next middleware
+//         next();
+//     } catch (err) {
+//         if (err.name === 'TokenExpiredError') {
+//             // JWT token has expired, check for refresh token
+//             const refreshToken = req.headers.refresh_token;
+
+//             if (!refreshToken) {
+//                 return res.status(401).json({ message: "Unauthorized, no refresh token found." });
+//             }
+
+//             try {
+//                 // Verify refresh token
+//                 const decodedRefreshToken = jwt.verify(refreshToken, secret);
+
+//                 // If verification succeeds, generate new JWT token and proceed
+//                 const newToken = jwt.sign({ userId: decodedRefreshToken.userId }, secret, { expiresIn: '1h' });
+
+//                 // Set new JWT token in response headers
+//                 res.setHeader('Authorization', `Bearer ${newToken}`);
+
+//                 // Proceed to next middleware
+//                 next();
+//             } catch (error) {
+//                 return res.status(401).json({ message: "Unauthorized, invalid refresh token." });
+//             }
+//         } else {
+//             // Other JWT verification errors
+//             return res.status(401).json({ message: "Unauthorized JWT" });
+//         }
+//     }
+// }
 
 /** Helper function to get the user object from it's ID
  */

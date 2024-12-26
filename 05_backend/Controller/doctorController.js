@@ -498,8 +498,8 @@ module.exports = { getAllDisease, getAllDoctorNames, doctorProfile, addDoctor, d
 //     const transporter = nodemailer.createTransport({
 //       service: "gmail",
 //       auth: {
-//         user: 'khandelwalkh@rknec.edu', // Replace with your email address
-//         pass: '@flysky123' // Replace with your email password
+//         user: '', // Replace with your email address
+//         pass: '' // Replace with your email password
 //       }
 //     });
 
